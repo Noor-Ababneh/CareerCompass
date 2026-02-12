@@ -1,55 +1,45 @@
 <template>
-  <div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-100 via-white to-teal-100" dir="rtl">
+  <div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-teal-500" dir="rtl">
 
-    <!-- Animated Background Shapes -->
-    <div class="absolute w-72 h-72 bg-blue-300 rounded-full opacity-20 blur-3xl animate-blob top-10 right-10"></div>
-    <div class="absolute w-72 h-72 bg-teal-300 rounded-full opacity-20 blur-3xl animate-blob animation-delay-2000 bottom-10 left-10"></div>
+    <div class="absolute w-72 h-72 bg-blue-400 rounded-full opacity-20 blur-3xl animate-blob top-10 right-10"></div>
+    <div class="absolute w-72 h-72 bg-teal-400 rounded-full opacity-20 blur-3xl animate-blob animation-delay-2000 bottom-10 left-10"></div>
 
-    <!-- Glass Card -->
-    <div class="relative w-full max-w-md backdrop-blur-lg bg-white/60 border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500">
+    <div class="relative w-full max-w-md backdrop-blur-lg bg-white/90 border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500">
 
-      <!-- Header -->
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-blue-800">CareerCompass</h1>
+        <h1 class="text-3xl font-bold text-blue-900">CareerCompass</h1>
         <p class="text-gray-600 mt-2 text-sm">
           ابدأ رحلتك الأكاديمية بثقة ✨
         </p>
       </div>
 
-      <!-- Step Indicator -->
       <div class="flex justify-center mb-6 space-x-4 space-x-reverse">
         <div :class="step === 1 ? activeStep : inactiveStep">1</div>
         <div :class="step === 2 ? activeStep : inactiveStep">2</div>
       </div>
 
-      <!-- FORM -->
       <form @submit.prevent="nextStep">
 
-        <!-- STEP 1 -->
         <div v-if="step === 1" class="space-y-6">
 
-          <!-- Name -->
           <div class="relative">
-            <input v-model="name" type="text" required class="floating-input peer" />
+            <input v-model="name" type="text" required class="floating-input peer" placeholder=" " />
             <label class="floating-label">الاسم الكامل</label>
           </div>
 
-          <!-- Email -->
           <div class="relative">
-            <input v-model="email" type="email" required class="floating-input peer" />
+            <input v-model="email" type="email" required class="floating-input peer" placeholder=" " />
             <label class="floating-label">البريد الإلكتروني</label>
           </div>
 
-          <!-- Password -->
           <div class="relative">
-            <input v-model="password" type="password" required class="floating-input peer" />
+            <input v-model="password" type="password" required class="floating-input peer" placeholder=" " />
             <label class="floating-label">كلمة المرور</label>
           </div>
 
           <button class="primary-btn mt-6">التالي</button>
         </div>
 
-        <!-- STEP 2 -->
         <div v-if="step === 2" class="space-y-6">
 
           <h3 class="text-center text-gray-700 font-medium">
@@ -82,7 +72,7 @@
           <button
             type="button"
             @click="step = 1"
-            class="text-sm text-gray-500 hover:text-blue-600 transition"
+            class="text-sm text-gray-500 hover:text-blue-700 transition"
           >
             رجوع
           </button>
@@ -91,10 +81,9 @@
 
       </form>
 
-      <!-- Login Link -->
       <div class="text-center mt-8 text-sm">
         لديك حساب؟
-        <router-link to="/login" class="text-teal-600 font-semibold hover:underline">
+        <router-link to="/" class="text-teal-600 font-semibold hover:underline">
           تسجيل الدخول
         </router-link>
       </div>
@@ -106,11 +95,12 @@
 <script setup>
 import { ref } from "vue"
 import { useRouter } from "vue-router"
-import { useAuthStore } from "@/stores/auth"
+import { useAuthStore } from "@/stores/auth" // تأكدي من المسار stores
 
 const router = useRouter()
 const authStore = useAuthStore()
 
+// المتغيرات اللي كانت ناقصة وسببت الخطأ
 const step = ref(1)
 const name = ref("")
 const email = ref("")
@@ -124,22 +114,24 @@ const grades = [
   { value: "12", label: "التوجيهي" }
 ]
 
-const activeStep =
-  "w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center"
-
-const inactiveStep =
-  "w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center"
+const activeStep = "w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold"
+const inactiveStep = "w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center"
 
 function nextStep() {
   if (step.value === 1) {
-    step.value = 2
+    if (name.value && email.value && password.value) {
+        step.value = 2
+    }
   } else {
+    // حفظ البيانات في الـ Store
     authStore.register({
       name: name.value,
       email: email.value,
       gradeLevel: grade.value
     })
-    router.push("/dashboard")
+    // الانتقال للداشبورد (لسه ما عملناها بس عشان ما يعطي خطأ)
+    console.log("تم التسجيل!")
+    // router.push("/dashboard") // فعلي هذا السطر بس نعمل الداشبورد
   }
 }
 
@@ -149,32 +141,32 @@ function selectGrade(val) {
 </script>
 
 <style scoped>
-/* Floating Input */
+/* Floating Input Logic */
 .floating-input {
   @apply w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 bg-white/80 focus:outline-none focus:ring-2 focus:ring-teal-400 transition;
 }
 .floating-label {
-  @apply absolute right-4 top-2 text-gray-500 text-sm transition-all;
+  @apply absolute right-4 top-3 text-gray-500 text-sm transition-all pointer-events-none;
 }
 .floating-input:focus + .floating-label,
 .floating-input:not(:placeholder-shown) + .floating-label {
-  @apply text-xs text-blue-600 top-1;
+  @apply text-xs text-blue-600 top-1 font-semibold;
 }
 
-/* Button */
+/* Buttons */
 .primary-btn {
-  @apply w-full h-12 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-xl font-semibold shadow-md hover:scale-[1.03] transition transform disabled:opacity-50;
+  @apply w-full h-12 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-xl font-semibold shadow-md hover:scale-[1.02] transition transform disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
 /* Grade Cards */
 .grade-card {
-  @apply p-4 rounded-xl border border-gray-300 bg-white hover:shadow-md transition text-sm;
+  @apply p-4 rounded-xl border border-gray-300 bg-white hover:shadow-md transition text-sm text-gray-600 font-medium;
 }
 .grade-active {
-  @apply border-blue-600 bg-blue-50 text-blue-700 font-semibold;
+  @apply border-blue-600 bg-blue-50 text-blue-700 font-bold ring-2 ring-blue-200;
 }
 
-/* Animated blobs */
+/* Animation Keyframes */
 @keyframes blob {
   0% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(30px, -50px) scale(1.1); }
@@ -182,7 +174,7 @@ function selectGrade(val) {
   100% { transform: translate(0, 0) scale(1); }
 }
 .animate-blob {
-  animation: blob 12s infinite ease-in-out;
+  animation: blob 10s infinite ease-in-out;
 }
 .animation-delay-2000 {
   animation-delay: 2s;
