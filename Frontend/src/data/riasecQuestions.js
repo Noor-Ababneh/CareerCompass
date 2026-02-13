@@ -1,63 +1,51 @@
+// src/data/riasecQuestions.js
+
 export const riasecQuestions = [
+  // --- R: Realistic (الواقعي) ---
+  // يركز على الأدوات، الآلات، العمل اليدوي، والطبيعة
+  { id: 1, text_ar: "أحب فك وتركيب الأجهزة لمعرفة كيف تعمل من الداخل.", dimension: "R" },
+  { id: 2, text_ar: "أفضل العمل في الهواء الطلق (موقع بناء، مزرعة) بدلاً من الجلوس في مكتب مغلق.", dimension: "R" },
+  { id: 3, text_ar: "أعتبر نفسي شخصاً عملياً؛ أحب رؤية نتائج ملموسة لعملي فوراً.", dimension: "R" },
+  { id: 4, text_ar: "لا أمانع أن تتسخ يداي أثناء العمل (بالزيوت، التربة، أو الألوان).", dimension: "R" },
+  { id: 5, text_ar: "أفضل التعامل مع الآلات والمعدات أكثر من التعامل مع الناس.", dimension: "R" },
 
-  // REALISTIC (R)
-  { id: 1, text_ar: "أستمتع بإصلاح الأجهزة أو التعامل مع الأدوات.", dimension: "R", reverse: false },
-  { id: 2, text_ar: "أفضل العمل في بيئة عملية أكثر من مكتبية.", dimension: "R", reverse: false },
-  { id: 3, text_ar: "أحب الأنشطة التي تتطلب استخدام اليدين.", dimension: "R", reverse: false },
-  { id: 4, text_ar: "لا أستمتع بالعمل الميكانيكي.", dimension: "R", reverse: true },
-  { id: 5, text_ar: "أفضل العمل في المختبر أو الورشة.", dimension: "R", reverse: false },
-  { id: 6, text_ar: "أفضل العمل مع الأشياء أكثر من الناس.", dimension: "R", reverse: false },
-  { id: 7, text_ar: "أملّ من الأعمال التقنية.", dimension: "R", reverse: true },
-  { id: 8, text_ar: "أشعر بالراحة عند التعامل مع المعدات.", dimension: "R", reverse: false },
+  // --- I: Investigative (التحليلي) ---
+  // يركز على العلوم، الرياضيات، البرمجة، وحل المشكلات
+  { id: 6, text_ar: "تثير فضولي الألغاز المعقدة والمسائل التي تحتاج لتفكير عميق.", dimension: "I" },
+  { id: 7, text_ar: "أستمتع بقراءة المقالات العلمية أو مشاهدة الوثائقيات عن الاكتشافات الجديدة.", dimension: "I" },
+  { id: 8, text_ar: "عندما أواجه مشكلة، أبحث عن السبب الجذري والمنطقي لها أولاً.", dimension: "I" },
+  { id: 9, text_ar: "أحب العمليات الحسابية وتحليل البيانات أو الرسومات البيانية.", dimension: "I" },
+  { id: 10, text_ar: "أفضل العمل المستقل الذي يتطلب تركيزاً ذهنياً عالياً.", dimension: "I" },
 
-  // INVESTIGATIVE (I)
-  { id: 9, text_ar: "أحب تحليل المشكلات المعقدة.", dimension: "I", reverse: false },
-  { id: 10, text_ar: "أستمتع بالبحث العلمي.", dimension: "I", reverse: false },
-  { id: 11, text_ar: "أبحث دائماً عن تفسير منطقي للأشياء.", dimension: "I", reverse: false },
-  { id: 12, text_ar: "لا أحب التفكير العميق في المشكلات.", dimension: "I", reverse: true },
-  { id: 13, text_ar: "أحب الرياضيات أو العلوم.", dimension: "I", reverse: false },
-  { id: 14, text_ar: "أفضل التحليل على التنفيذ المباشر.", dimension: "I", reverse: false },
-  { id: 15, text_ar: "أشعر بالملل من الأنشطة الفكرية.", dimension: "I", reverse: true },
-  { id: 16, text_ar: "أحب اكتشاف أنماط أو علاقات بين البيانات.", dimension: "I", reverse: false },
+  // --- A: Artistic (الإبداعي) ---
+  // يركز على الفنون، اللغات، التصميم، والخيال
+  { id: 11, text_ar: "أحب التعبير عن أفكاري بطرق غير تقليدية (رسم، كتابة، موسيقى).", dimension: "A" },
+  { id: 12, text_ar: "أهتم جداً بجماليات الأشياء، الألوان، والتصاميم من حولي.", dimension: "A" },
+  { id: 13, text_ar: "أكره القواعد الصارمة والروتين؛ أحب الحرية في أداء المهام.", dimension: "A" },
+  { id: 14, text_ar: "لدي خيال واسع وأستطيع ابتكار أفكار جديدة بسهولة.", dimension: "A" },
+  { id: 15, text_ar: "أستمتع بحضور المعارض الفنية، المسرحيات، أو قراءة الروايات.", dimension: "A" },
 
-  // ARTISTIC (A)
-  { id: 17, text_ar: "أحب التعبير عن نفسي بطريقة إبداعية.", dimension: "A", reverse: false },
-  { id: 18, text_ar: "أستمتع بالرسم أو الكتابة أو التصميم.", dimension: "A", reverse: false },
-  { id: 19, text_ar: "أفضل العمل الحر غير المقيد بالقواعد.", dimension: "A", reverse: false },
-  { id: 20, text_ar: "أفضل الأعمال المنظمة ذات الخطوات الواضحة.", dimension: "A", reverse: true },
-  { id: 21, text_ar: "أحب ابتكار أفكار جديدة.", dimension: "A", reverse: false },
-  { id: 22, text_ar: "أملّ من الروتين المتكرر.", dimension: "A", reverse: false },
-  { id: 23, text_ar: "لا أجد نفسي في الأنشطة الفنية.", dimension: "A", reverse: true },
-  { id: 24, text_ar: "أحب التفكير خارج الصندوق.", dimension: "A", reverse: false },
+  // --- S: Social (الاجتماعي) ---
+  // يركز على مساعدة الناس، التعليم، والخدمة
+  { id: 16, text_ar: "أشعر بالسعادة عندما أساعد شخصاً ما في حل مشكلته الشخصية.", dimension: "S" },
+  { id: 17, text_ar: "الناس يصفونني بأنني مستمع جيد ومتعاطف مع الآخرين.", dimension: "S" },
+  { id: 18, text_ar: "أفضل العمل ضمن فريق وأحب النقاشات الجماعية.", dimension: "S" },
+  { id: 19, text_ar: "أجد نفسي صبوراً جداً عند شرح معلومة لشخص لا يفهمها.", dimension: "S" },
+  { id: 20, text_ar: "أهتم بالعمل التطوعي وخدمة المجتمع.", dimension: "S" },
 
-  // SOCIAL (S)
-  { id: 25, text_ar: "أحب مساعدة الآخرين.", dimension: "S", reverse: false },
-  { id: 26, text_ar: "أستمتع بالعمل ضمن فريق.", dimension: "S", reverse: false },
-  { id: 27, text_ar: "أشعر بالرضا عند تعليم شخص شيئاً جديداً.", dimension: "S", reverse: false },
-  { id: 28, text_ar: "أفضل العمل الفردي دون تفاعل.", dimension: "S", reverse: true },
-  { id: 29, text_ar: "أستمع جيداً لمشكلات الآخرين.", dimension: "S", reverse: false },
-  { id: 30, text_ar: "أحب التفاعل مع الناس يومياً.", dimension: "S", reverse: false },
-  { id: 31, text_ar: "أفضل تجنب التعامل مع الناس.", dimension: "S", reverse: true },
-  { id: 32, text_ar: "أشعر بالراحة في بيئات تعليمية أو صحية.", dimension: "S", reverse: false },
+  // --- E: Enterprising (القيادي) ---
+  // يركز على الإدارة، التسويق، الإقناع، والقيادة
+  { id: 21, text_ar: "أحب أن أكون قائد المجموعة وأن أتخذ القرارات المهمة.", dimension: "E" },
+  { id: 22, text_ar: "لدي قدرة على إقناع الآخرين بوجهة نظري بسهولة.", dimension: "E" },
+  { id: 23, text_ar: "أتحمس للمنافسة والسعي لتحقيق أهداف وطموحات عالية.", dimension: "E" },
+  { id: 24, text_ar: "أستمتع بتنظيم الفعاليات أو بدء مشاريع صغيرة.", dimension: "E" },
+  { id: 25, text_ar: "أهتم بمتابعة أخبار المال والأعمال والاقتصاد.", dimension: "E" },
 
-  // ENTERPRISING (E)
-  { id: 33, text_ar: "أحب قيادة الآخرين.", dimension: "E", reverse: false },
-  { id: 34, text_ar: "أستمتع بإقناع الناس بوجهة نظري.", dimension: "E", reverse: false },
-  { id: 35, text_ar: "أفضل اتخاذ القرار بنفسي.", dimension: "E", reverse: false },
-  { id: 36, text_ar: "لا أحب تحمل المسؤولية.", dimension: "E", reverse: true },
-  { id: 37, text_ar: "أستمتع بالمنافسة.", dimension: "E", reverse: false },
-  { id: 38, text_ar: "أحب بدء مشاريع جديدة.", dimension: "E", reverse: false },
-  { id: 39, text_ar: "أفضل أن يقودني الآخرون.", dimension: "E", reverse: true },
-  { id: 40, text_ar: "أشعر بالراحة في بيئة أعمال.", dimension: "E", reverse: false },
-
-  // CONVENTIONAL (C)
-  { id: 41, text_ar: "أفضل العمل المنظم ذو القواعد الواضحة.", dimension: "C", reverse: false },
-  { id: 42, text_ar: "أهتم بالدقة والتفاصيل.", dimension: "C", reverse: false },
-  { id: 43, text_ar: "أستمتع بترتيب البيانات.", dimension: "C", reverse: false },
-  { id: 44, text_ar: "أفضل العمل غير المنظم والعشوائي.", dimension: "C", reverse: true },
-  { id: 45, text_ar: "أحب اتباع التعليمات.", dimension: "C", reverse: false },
-  { id: 46, text_ar: "أشعر بالراحة في الأعمال المكتبية.", dimension: "C", reverse: false },
-  { id: 47, text_ar: "أكره الروتين.", dimension: "C", reverse: true },
-  { id: 48, text_ar: "أفضل العمل الذي يتطلب دقة حسابية.", dimension: "C", reverse: false }
-
+  // --- C: Conventional (التنظيمي) ---
+  // يركز على البيانات، التنظيم، الدقة، واتباع القوانين
+  { id: 26, text_ar: "أحب أن تكون أشيائي مرتبة ومنظمة جداً، ولكل شيء مكانه.", dimension: "C" },
+  { id: 27, text_ar: "أفضل العمل الذي فيه تعليمات واضحة وخطوات محددة.", dimension: "C" },
+  { id: 28, text_ar: "أهتم بالتفاصيل الدقيقة وأراجع عملي للتأكد من خلوه من الأخطاء.", dimension: "C" },
+  { id: 29, text_ar: "أحب التعامل مع الجداول، القوائم، والأرشفة.", dimension: "C" },
+  { id: 30, text_ar: "أشعر بالراحة في الروتين والاستقرار الوظيفي.", dimension: "C" }
 ];
