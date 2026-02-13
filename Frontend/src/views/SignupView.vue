@@ -1,10 +1,24 @@
 <template>
   <div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-teal-500" dir="rtl">
-
+<button 
+      @click="router.push('/')" 
+      class="absolute top-6 right-6 z-50 flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white font-semibold hover:bg-white/30 transition shadow-lg"
+    >
+      <span>🏠</span> الصفحة الرئيسية
+    </button>
     <div class="absolute w-72 h-72 bg-blue-400 rounded-full opacity-20 blur-3xl animate-blob top-10 right-10"></div>
     <div class="absolute w-72 h-72 bg-teal-400 rounded-full opacity-20 blur-3xl animate-blob animation-delay-2000 bottom-10 left-10"></div>
 
     <div class="relative w-full max-w-md backdrop-blur-lg bg-white/90 border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500">
+
+      <button 
+        type="button"
+        @click="router.back()" 
+        class="absolute top-6 left-6 text-gray-400 hover:text-blue-600 transition duration-300 flex items-center gap-1 font-medium text-sm"
+        title="رجوع"
+      >
+        <span class="text-xl transform rotate-180">➜</span> رجوع
+      </button>
 
       <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-blue-900">CareerCompass</h1>
@@ -83,7 +97,7 @@
 
       <div class="text-center mt-8 text-sm">
         لديك حساب؟
-        <router-link to="/" class="text-teal-600 font-semibold hover:underline">
+        <router-link to="/login" class="text-teal-600 font-semibold hover:underline">
           تسجيل الدخول
         </router-link>
       </div>
@@ -95,12 +109,11 @@
 <script setup>
 import { ref } from "vue"
 import { useRouter } from "vue-router"
-import { useAuthStore } from "@/stores/auth" // تأكدي من المسار stores
+import { useAuthStore } from "@/stores/auth"
 
 const router = useRouter()
 const authStore = useAuthStore()
 
-// المتغيرات اللي كانت ناقصة وسببت الخطأ
 const step = ref(1)
 const name = ref("")
 const email = ref("")
@@ -123,15 +136,14 @@ function nextStep() {
         step.value = 2
     }
   } else {
-    // حفظ البيانات في الـ Store
+    // حفظ البيانات
     authStore.register({
       name: name.value,
       email: email.value,
       gradeLevel: grade.value
     })
-    // الانتقال للداشبورد (لسه ما عملناها بس عشان ما يعطي خطأ)
-    console.log("تم التسجيل!")
-    // router.push("/dashboard") // فعلي هذا السطر بس نعمل الداشبورد
+    // الانتقال للداشبورد
+    router.push("/dashboard")
   }
 }
 

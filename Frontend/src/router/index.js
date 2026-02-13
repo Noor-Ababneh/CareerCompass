@@ -1,14 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'       // الصفحة الجديدة
+
+// استدعاء الصفحات القديمة
+import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignupView from '../views/SignupView.vue'
-import DashboardView from '../views/DashboardView.vue' // صفحة الطالب الخاصة
+import DashboardView from '../views/DashboardView.vue'
+
+// 👇 استدعاء الصفحات الجديدة
+import AssessmentView from '../views/AssessmentView.vue'
+import ResultsView from '../views/ResultsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',          // الرابط الأساسي يفتح الصفحة الرئيسية
+      path: '/',
       name: 'home',
       component: HomeView
     },
@@ -23,9 +29,20 @@ const router = createRouter({
       component: SignupView
     },
     {
-      path: '/dashboard', // هذا الرابط ما بفتح إلا لما يسجل دخول
+      path: '/dashboard',
       name: 'dashboard',
       component: DashboardView
+    },
+    // 👇 روابط الصفحات الجديدة
+    {
+      path: '/assessment',
+      name: 'assessment',
+      component: AssessmentView
+    },
+    {
+      path: '/results',
+      name: 'results',
+      component: ResultsView
     }
   ]
 })
