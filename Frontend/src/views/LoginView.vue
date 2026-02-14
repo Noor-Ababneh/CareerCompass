@@ -70,9 +70,12 @@
 
       </form>
 
-      <div class="text-center mt-8 text-sm text-gray-600">
+     <div class="text-center mt-8 text-sm text-gray-600">
         ليس لديك حساب؟
-        <router-link to="/signup" class="text-orange-500 font-bold hover:underline hover:text-orange-600 transition">
+        <router-link 
+          to="/signup" 
+          class="text-orange-500 font-bold hover:text-orange-600 hover:underline transition duration-300 ease-in-out"
+        >
           إنشاء حساب جديد
         </router-link>
       </div>

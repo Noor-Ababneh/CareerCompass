@@ -64,6 +64,18 @@
 
     </div>
   </div>
+  <div class="text-center mb-6">
+  <span v-if="currentQuestion.type === 'interest'" class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-bold">
+    الجزء الأول: الميول والاهتمامات ❤️
+  </span>
+  <span v-else class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-sm font-bold">
+    الجزء الثاني: القدرات والمهارات 💪
+  </span>
+</div>
+
+<h2 class="text-2xl font-bold text-gray-800 mb-6 leading-relaxed">
+  {{ currentQuestion.text_ar }}
+</h2>
 </template>
 
 <script setup>
@@ -107,12 +119,33 @@ function selectAnswer(value) {
 }
 
 function calculateTopResult() {
-  // حساب النمط الأعلى
-  const sorted = Object.entries(scores.value).sort((a, b) => b[1] - a[1])
-  topResultCode.value = sorted[0][0] // نأخذ الحرف الأول (مثلاً I)
-  
-  // إظهار السؤال الفاصل
-  showTieBreaker.value = true
+  // 1. ترتيب النتائج من الأعلى للأقل
+  // في حال التعادل، الترتيب الافتراضي (R, I, A...) يحسم الأمر مؤقتاً
+  const sorted = Object.entries(scores.value).sort((a, b) => {
+    if (b[1] === a[1]) {
+      // Tie-Breaker بسيط: في حال التعادل، نفضل النمط المذكور أولاً لضمان الاستقرار
+      return 0; 
+    }
+    return b[1] - a[1];
+  });
+
+  // أعلى نمط (مثلاً I)
+  const firstPlace = sorted[0]; 
+  const secondPlace = sorted[1];
+
+  console.log("النتائج مرتبة:", sorted); // للتجربة في الكونسول
+
+  // 2. التحقق من التعادل القوي (إذا الأول والثاني نفس العلامة بالضبط)
+  // ونريد التأكد أن المستخدم أجاب بجدية (مجموع النقاط ليس صفراً)
+  if (firstPlace[1] > 0) {
+    topResultCode.value = firstPlace[0];
+    showTieBreaker.value = true;
+  } else {
+    // حالة نادرة: المستخدم جاوب "لا أوافق بشدة" على كل شي!
+    // نعطيه رسالة خطأ أو نوجهه لصفحة تعتذر منه
+    alert("يبدو أنك لم تختر إجابات كافية لتحديد ميولك. يرجى المحاولة بجدية أكثر!");
+    router.push('/dashboard');
+  }
 }
 
 function finishWithTieBreaker(selectedOption) {

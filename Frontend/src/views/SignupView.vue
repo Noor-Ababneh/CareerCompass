@@ -9,7 +9,7 @@
     <div class="absolute w-72 h-72 bg-blue-400 rounded-full opacity-20 blur-3xl animate-blob top-10 right-10"></div>
     <div class="absolute w-72 h-72 bg-teal-400 rounded-full opacity-20 blur-3xl animate-blob animation-delay-2000 bottom-10 left-10"></div>
 
-    <div class="relative w-full max-w-md backdrop-blur-lg bg-white/90 border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500">
+    <div class="relative w-full max-w-md backdrop-blur-lg bg-white/90 border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500 animate-fade-in">
 
       <button 
         type="button"
@@ -190,5 +190,14 @@ function selectGrade(val) {
 }
 .animation-delay-2000 {
   animation-delay: 2s;
+}
+/* Animation Keyframes */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards; /* forwards مهمة عشان تثبت الحركة */
 }
 </style>
