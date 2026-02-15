@@ -1,77 +1,87 @@
 export const riasecQuestions = [
   // =================================================================================
-  // الجزء الأول: الميول والاهتمامات (Interests)
-  // السؤال: إلى أي مدى تحب أو تفضل القيام بهذه الأنشطة؟
+  // الجزء الأول: الميول (Interests) - 5 أسئلة لكل نمط
   // =================================================================================
 
   // --- R: Realistic (الواقعي) ---
-  { id: 1, text_ar: "العمل باستخدام الأدوات اليدوية أو الآلات لصنع أو إصلاح الأشياء.", dimension: "R", type: "interest" },
-  { id: 2, text_ar: "قضاء وقت طويل في الهواء الطلق (مواقع ميدانية، طبيعة).", dimension: "R", type: "interest" },
-  { id: 3, text_ar: "التعامل مع التكنولوجيا الملموسة (تركيب شبكات، صيانة أجهزة).", dimension: "R", type: "interest" },
-  { id: 4, text_ar: "ممارسة أنشطة تتطلب جهداً حركياً وجسدياً.", dimension: "R", type: "interest" },
+  { id: 1, text_ar: "العمل اليدوي في الهواء الطلق (مثل الزراعة، البناء، المواقع الميدانية).", dimension: "R", type: "interest" },
+  { id: 2, text_ar: "فك وتركيب الأجهزة لمعرفة كيف تعمل من الداخل.", dimension: "R", type: "interest" },
+  { id: 3, text_ar: "التعامل المباشر مع الحيوانات أو النباتات والعناية بها.", dimension: "R", type: "interest" },
+  { id: 4, text_ar: "استخدام الأدوات والمعدات لصنع أشياء ملموسة (خشب، معدن).", dimension: "R", type: "interest" },
+  { id: 5, text_ar: "ممارسة أنشطة تتطلب حركة جسدية ولياقة بدنية.", dimension: "R", type: "interest" }, // سؤال إضافي
 
   // --- I: Investigative (التحليلي) ---
-  { id: 5, text_ar: "البحث عن حلول للمشاكل المعقدة التي تحتاج تفكيراً عميقاً.", dimension: "I", type: "interest" },
-  { id: 6, text_ar: "إجراء تجارب علمية أو أبحاث لفهم كيف تعمل الأشياء.", dimension: "I", type: "interest" },
-  { id: 7, text_ar: "تحليل البيانات والأرقام للوصول إلى استنتاجات منطقية.", dimension: "I", type: "interest" },
-  { id: 8, text_ar: "القراءة والتعلم المستمر عن الاكتشافات العلمية والتقنية.", dimension: "I", type: "interest" },
+  { id: 6, text_ar: "التفكير في كيفية تصميم وتطوير تطبيقات الهواتف أو ألعاب الفيديو.", dimension: "I", type: "interest" }, // تعديل الصيغة
+  { id: 7, text_ar: "إجراء التجارب العلمية واكتشاف حقائق جديدة.", dimension: "I", type: "interest" },
+  { id: 8, text_ar: "تحليل الأرقام والبيانات لحل المشاكل المعقدة.", dimension: "I", type: "interest" },
+  { id: 9, text_ar: "القراءة عن الاكتشافات الطبية أو التكنولوجية الحديثة.", dimension: "I", type: "interest" },
+  { id: 10, text_ar: "حل الألغاز التي تتطلب تفكيراً منطقياً وعميقاً.", dimension: "I", type: "interest" }, // سؤال إضافي
 
   // --- A: Artistic (الإبداعي) ---
-  { id: 9, text_ar: "التعبير عن أفكاري بطرق فنية (رسم، كتابة، تصميم، موسيقى).", dimension: "A", type: "interest" },
-  { id: 10, text_ar: "العمل في بيئة مرنة غير مقيدة بقواعد صارمة.", dimension: "A", type: "interest" },
-  { id: 11, text_ar: "تصميم أشياء جديدة ومبتكرة (جرافيك، أزياء، ديكور).", dimension: "A", type: "interest" },
-  { id: 12, text_ar: "حضور الفعاليات الثقافية والفنية والأدبية.", dimension: "A", type: "interest" },
+  { id: 11, text_ar: "تصميم أشياء بصرية جميلة (مثل الديكور، الملابس، أو الجرافيك).", dimension: "A", type: "interest" },
+  { id: 12, text_ar: "كتابة القصص، السيناريوهات، أو المحتوى الإبداعي.", dimension: "A", type: "interest" },
+  { id: 13, text_ar: "تعلم اللغات الأجنبية والتعرف على ثقافات مختلفة.", dimension: "A", type: "interest" },
+  { id: 14, text_ar: "الوقوف أمام الجمهور للتمثيل أو تقديم محتوى إبداعي.", dimension: "A", type: "interest" },
+  { id: 15, text_ar: "استخدام الخيال لابتكار أفكار غير تقليدية وجديدة.", dimension: "A", type: "interest" }, // سؤال إضافي
 
   // --- S: Social (الاجتماعي) ---
-  { id: 13, text_ar: "تعليم الآخرين ومساعدتهم على تطوير مهاراتهم.", dimension: "S", type: "interest" },
-  { id: 14, text_ar: "تقديم الرعاية والدعم النفسي أو الصحي للناس.", dimension: "S", type: "interest" },
-  { id: 15, text_ar: "العمل ضمن فريق ومشاركة الأفكار مع الآخرين.", dimension: "S", type: "interest" },
-  { id: 16, text_ar: "المشاركة في الأنشطة التطوعية وخدمة المجتمع.", dimension: "S", type: "interest" },
+  { id: 16, text_ar: "مساعدة زملائي في فهم الدروس وشرح المعلومات لهم.", dimension: "S", type: "interest" },
+  { id: 17, text_ar: "الاستماع لمشاكل أصدقائي ومحاولة التخفيف عنهم.", dimension: "S", type: "interest" },
+  { id: 18, text_ar: "رعاية المرضى أو الأطفال أو كبار السن.", dimension: "S", type: "interest" },
+  { id: 19, text_ar: "المشاركة في الأعمال التطوعية وخدمة المجتمع.", dimension: "S", type: "interest" },
+  { id: 20, text_ar: "العمل ضمن فريق ومشاركة الأفكار مع الآخرين.", dimension: "S", type: "interest" }, // سؤال إضافي
 
   // --- E: Enterprising (القيادي) ---
-  { id: 17, text_ar: "إقناع الناس بوجهة نظري أو التفاوض معهم.", dimension: "E", type: "interest" },
-  { id: 18, text_ar: "تولي مناصب قيادية وإدارة المشاريع أو فرق العمل.", dimension: "E", type: "interest" },
-  { id: 19, text_ar: "المنافسة لتحقيق أهداف طموحة وربحية.", dimension: "E", type: "interest" },
-  { id: 20, text_ar: "التحدث أمام الجمهور وتقديم العروض التقديمية.", dimension: "E", type: "interest" },
+  { id: 21, text_ar: "قيادة مجموعة في مشروع مدرسي أو نشاط اجتماعي.", dimension: "E", type: "interest" },
+  { id: 22, text_ar: "إقناع الآخرين بفكرة معينة أو منتج.", dimension: "E", type: "interest" },
+  { id: 23, text_ar: "التفكير في مشاريع تجارية صغيرة للربح منها.", dimension: "E", type: "interest" },
+  { id: 24, text_ar: "التحدث بجرأة للدفاع عن رأيي أو حقوقي.", dimension: "E", type: "interest" },
+  { id: 25, text_ar: "التخطيط وإدارة الفعاليات أو الأنشطة.", dimension: "E", type: "interest" }, // سؤال إضافي
 
   // --- C: Conventional (التنظيمي) ---
-  { id: 21, text_ar: "تنظيم المعلومات والملفات والجداول بدقة عالية.", dimension: "C", type: "interest" },
-  { id: 22, text_ar: "اتباع إجراءات وقواعد عمل واضحة ومحددة.", dimension: "C", type: "interest" },
-  { id: 23, text_ar: "التعامل مع الحسابات المالية والأرقام التفصيلية.", dimension: "C", type: "interest" },
-  { id: 24, text_ar: "التأكد من خلو العمل من الأخطاء ومطابقته للمعايير.", dimension: "C", type: "interest" },
+  { id: 26, text_ar: "ترتيب الملفات، الجداول، والمواعيد بدقة.", dimension: "C", type: "interest" },
+  { id: 27, text_ar: "اتباع القوانين والخطوات الواضحة لإنجاز العمل.", dimension: "C", type: "interest" },
+  { id: 28, text_ar: "التعامل مع الحسابات المالية والأرقام بدقة.", dimension: "C", type: "interest" },
+  { id: 29, text_ar: "التدقيق ومراجعة الأعمال للتأكد من خلوها من الأخطاء.", dimension: "C", type: "interest" },
+  { id: 30, text_ar: "العمل في بيئة منظمة وروتينية واضحة المعالم.", dimension: "C", type: "interest" }, // سؤال إضافي
 
   // =================================================================================
-  // الجزء الثاني: القدرات والمهارات (Skills & Confidence)
-  // السؤال: ما مدى إجادتك أو ثقتك بقدرتك على القيام بهذه المهام؟
+  // الجزء الثاني: المهارات (Skills) - 4 أسئلة لكل نمط
   // =================================================================================
 
   // --- R Skills ---
-  { id: 25, text_ar: "استخدام الأدوات اليدوية أو الإلكترونية بمهارة.", dimension: "R", type: "skill" },
-  { id: 26, text_ar: "إصلاح الأعطال الميكانيكية أو المنزلية البسيطة.", dimension: "R", type: "skill" },
-  { id: 27, text_ar: "بناء أو تجميع الأشياء بدقة (مثل الأثاث أو النماذج).", dimension: "R", type: "skill" },
+  { id: 31, text_ar: "أجيد استخدام يديّ لإصلاح الأشياء بمهارة.", dimension: "R", type: "skill" },
+  { id: 32, text_ar: "أتحمل الجهد البدني والعمل في الخارج.", dimension: "R", type: "skill" },
+  { id: 33, text_ar: "أجيد قراءة الخرائط أو المخططات.", dimension: "R", type: "skill" },
+  { id: 34, text_ar: "أستطيع التعامل مع النباتات أو الحيوانات دون خوف.", dimension: "R", type: "skill" },
 
   // --- I Skills ---
-  { id: 28, text_ar: "حل المسائل الرياضية أو المنطقية المعقدة.", dimension: "I", type: "skill" },
-  { id: 29, text_ar: "فهم واستيعاب المقالات العلمية أو التقنية الصعبة.", dimension: "I", type: "skill" },
-  { id: 30, text_ar: "تفسير البيانات والرسوم البيانية واستخراج النتائج منها.", dimension: "I", type: "skill" },
+  { id: 35, text_ar: "أجيد حل المسائل الرياضية والمنطقية.", dimension: "I", type: "skill" },
+  { id: 36, text_ar: "أستطيع فهم المقالات العلمية المعقدة.", dimension: "I", type: "skill" },
+  { id: 37, text_ar: "لدي مهارة في استخدام الحاسوب والبرامج المتقدمة.", dimension: "I", type: "skill" },
+  { id: 38, text_ar: "أتميز بدقة الملاحظة والتحليل.", dimension: "I", type: "skill" },
 
   // --- A Skills ---
-  { id: 31, text_ar: "كتابة قصص أو نصوص إبداعية ومؤثرة.", dimension: "A", type: "skill" },
-  { id: 32, text_ar: "الرسم، التصميم، أو العزف بمهارة جيدة.", dimension: "A", type: "skill" },
-  { id: 33, text_ar: "ابتكار أفكار جديدة وغير تقليدية لحل المشاكل.", dimension: "A", type: "skill" },
+  { id: 39, text_ar: "لدي موهبة فنية (رسم، موسيقى، تصميم) واضحة.", dimension: "A", type: "skill" },
+  { id: 40, text_ar: "أجيد الكتابة والتعبير عن أفكاري بأسلوب جميل.", dimension: "A", type: "skill" },
+  { id: 41, text_ar: "أتعلم نطق اللغات الجديدة بسرعة.", dimension: "A", type: "skill" },
+  { id: 42, text_ar: "خيالي واسع وأبتكر أفكاراً جديدة.", dimension: "A", type: "skill" },
 
   // --- S Skills ---
-  { id: 34, text_ar: "شرح الأمور للآخرين بطريقة تجعلهم يفهمونها بسهولة.", dimension: "S", type: "skill" },
-  { id: 35, text_ar: "الاستماع الجيد للناس وفهم مشاعرهم واحتياجاتهم.", dimension: "S", type: "skill" },
-  { id: 36, text_ar: "العمل بانسجام مع مجموعات مختلفة من الناس.", dimension: "S", type: "skill" },
+  { id: 43, text_ar: "الناس يثقون بي ويطلبون نصيحتي.", dimension: "S", type: "skill" },
+  { id: 44, text_ar: "أشرح المعلومات بطريقة سهلة ومفهومة.", dimension: "S", type: "skill" },
+  { id: 45, text_ar: "لدي صبر في التعامل مع الأطفال أو كبار السن.", dimension: "S", type: "skill" },
+  { id: 46, text_ar: "أعمل بانسجام وهدوء مع الفريق.", dimension: "S", type: "skill" },
 
   // --- E Skills ---
-  { id: 37, text_ar: "بيع منتج أو فكرة للآخرين وإقناعهم بها.", dimension: "E", type: "skill" },
-  { id: 38, text_ar: "اتخاذ القرارات وتحمل مسؤولية نتائجها.", dimension: "E", type: "skill" },
-  { id: 39, text_ar: "إدارة الوقت وتنظيم مهام الفريق بفعالية.", dimension: "E", type: "skill" },
+  { id: 47, text_ar: "أستطيع قيادة مجموعة وتوزيع المهام عليهم.", dimension: "E", type: "skill" },
+  { id: 48, text_ar: "أجيد التفاوض وإقناع الآخرين برأيي.", dimension: "E", type: "skill" },
+  { id: 49, text_ar: "أمتلك الجرأة للحديث أمام الجمهور.", dimension: "E", type: "skill" },
+  { id: 50, text_ar: "أتخذ القرارات بسرعة وتحت الضغط.", dimension: "E", type: "skill" },
 
   // --- C Skills ---
-  { id: 40, text_ar: "إبقاء السجلات والملفات مرتبة ومنظمة جداً.", dimension: "C", type: "skill" },
-  { id: 41, text_ar: "العمل على برامج الجداول (Excel) وإدخال البيانات بسرعة ودقة.", dimension: "C", type: "skill" },
-  { id: 42, text_ar: "الانتباه للتفاصيل الدقيقة واكتشاف الأخطاء الصغيرة.", dimension: "C", type: "skill" }
+  { id: 51, text_ar: "أنا شخص مرتب جداً ومنظم في أغراضي.", dimension: "C", type: "skill" },
+  { id: 52, text_ar: "أجيد التعامل مع برامج الجداول (Excel) والأرقام.", dimension: "C", type: "skill" },
+  { id: 53, text_ar: "أركز في التفاصيل الدقيقة لفترات طويلة.", dimension: "C", type: "skill" },
+  { id: 54, text_ar: "ألتزم بالمواعيد والقوانين دائماً.", dimension: "C", type: "skill" },
 ];

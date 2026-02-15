@@ -1,92 +1,107 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 font-sans text-white overflow-hidden relative" dir="rtl">
+  <div class="min-h-screen bg-gradient-to-br from-[#1e293b] via-[#334155] to-[#0f172a] font-sans text-white overflow-hidden relative" dir="rtl">
     
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-      <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-purple-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 animate-blob"></div>
-      <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 animate-blob animation-delay-2000"></div>
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div class="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-indigo-500/20 rounded-full blur-[120px] animate-pulse animation-delay-2000"></div>
     </div>
 
-    <nav class="relative z-50 border-b border-white/10 bg-white/5 backdrop-blur-lg">
-      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="text-2xl font-extrabold flex items-center gap-2 tracking-wide">
-          <span class="text-3xl">🧭</span> CareerCompass
+    <nav class="relative z-50 px-6 py-6 flex justify-between items-center max-w-7xl mx-auto border-b border-white/5 bg-white/5 backdrop-blur-md rounded-b-3xl">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-lg flex items-center justify-center text-2xl">🧭</div>
+        <span class="text-2xl font-black text-white tracking-tight drop-shadow-md">CareerCompass</span>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <div class="hidden md:flex flex-col items-end">
+          <span class="text-sm font-bold text-blue-100">مرحباً، {{ authStore.user?.name || 'يا بطل' }} 👋</span>
         </div>
-        
-        <div class="flex items-center gap-4">
-          <span class="text-blue-200 text-sm hidden md:inline font-medium bg-white/10 px-4 py-1.5 rounded-full border border-white/10">
-            مرحباً، {{ authStore.user?.name || 'يا بطل' }} 👋
-          </span>
-          <button 
-            @click="handleLogout" 
-            class="text-red-400 hover:text-white hover:bg-red-500/80 px-4 py-2 rounded-xl transition-all duration-300 text-sm font-bold border border-red-500/30"
-          >
-            خروج
-          </button>
-        </div>
+        <button 
+          @click="handleLogout" 
+          class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-2.5 rounded-xl font-bold transition-all duration-300 text-sm backdrop-blur-sm"
+        >
+          خروج
+        </button>
       </div>
     </nav>
 
     <div class="relative z-10 max-w-6xl mx-auto px-6 py-12">
 
-      <div class="mb-12 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-purple-200">
-          مرحبا يا طالب يا ضايع يا فاشل 🚀
+      <div class="text-center mb-16 animate-fade-in-up">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
+          أهلا يا طالب يا فاشل يا ضايع<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300">   يا فاشل مرة تانية بس بالأزرق. </span>
         </h1>
-        <p class="text-gray-300 text-lg max-w-2xl mx-auto">
-          كل الأدوات التي تحتاجها لرسم مستقبلك موجودة هنا. اختر وجهتك وابدأ الآن.
+        <p class="text-lg text-blue-100/80 max-w-2xl mx-auto font-medium">
+           أدوات يوزلس زي مشروعنا تماما
+            أدوات غير متطورة، تصميم سيئ، ونتائج غير دقيقة لمساعدتك في الضياع أكتر باتخاذ القرار.
         </p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
 
-        <div class="group relative bg-white/5 backdrop-blur-md rounded-3xl p-1 border border-white/10 hover:border-blue-400/50 transition-all duration-500 hover:-translate-y-2" @click="$router.push('/assessment')">
-          <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div 
+          @click="$router.push('/assessment')"
+          class="group bg-white/10 backdrop-blur-lg rounded-[2rem] p-8 border border-white/10 hover:bg-white/15 hover:border-white/20 hover:-translate-y-2 transition-all duration-500 cursor-pointer relative overflow-hidden"
+        >
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
-          <div class="relative h-full bg-gray-900/50 rounded-[22px] p-8 flex flex-col items-center text-center cursor-pointer overflow-hidden">
-            <div class="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center text-4xl mb-6 shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-500">
+          <div class="relative z-10">
+            <div class="w-16 h-16 bg-blue-500/20 text-blue-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner border border-white/5 group-hover:scale-110 transition-transform">
               🧠
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">اختبار الميول</h3>
-            <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-              اكتشف شخصيتك المهنية من خلال مقياس RIASEC العالمي المطور.
+            <h3 class="text-2xl font-bold text-white mb-3">اختبار الميول</h3>
+            <p class="text-blue-100/70 text-sm leading-relaxed mb-8">
+              اكتشف شخصيتك المهنية بدقة عالية.
             </p>
-            <span class="mt-auto text-blue-400 font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-              ابدأ الاختبار <span>←</span>
-            </span>
+            <div class="flex items-center justify-between mt-auto">
+              <span class="text-blue-200 font-bold text-sm bg-blue-500/20 px-4 py-2 rounded-full border border-blue-500/30 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                ابدأ الاختبار
+              </span>
+            </div>
           </div>
         </div>
 
-        <div class="group relative bg-white/5 backdrop-blur-md rounded-3xl p-1 border border-white/10 hover:border-teal-400/50 transition-all duration-500 hover:-translate-y-2" @click="$router.push('/grades-input')">
-          <div class="absolute inset-0 bg-gradient-to-r from-teal-500/20 to-emerald-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div 
+          @click="$router.push('/grades-input')"
+          class="group bg-white/10 backdrop-blur-lg rounded-[2rem] p-8 border border-white/10 hover:bg-white/15 hover:border-white/20 hover:-translate-y-2 transition-all duration-500 cursor-pointer relative overflow-hidden"
+        >
+          <div class="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
-          <div class="relative h-full bg-gray-900/50 rounded-[22px] p-8 flex flex-col items-center text-center cursor-pointer overflow-hidden">
-             <div class="w-20 h-20 bg-teal-500/20 rounded-full flex items-center justify-center text-4xl mb-6 shadow-lg shadow-teal-500/20 group-hover:scale-110 transition-transform duration-500">
+          <div class="relative z-10">
+            <div class="w-16 h-16 bg-teal-500/20 text-teal-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner border border-white/5 group-hover:scale-110 transition-transform">
               📊
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">تحليل العلامات</h3>
-            <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-              أدخل معدلاتك الدراسية لنقوم بربطها مع خياراتك الجامعية الأنسب.
+            <h3 class="text-2xl font-bold text-white mb-3">تحليل العلامات</h3>
+            <p class="text-blue-100/70 text-sm leading-relaxed mb-8">
+              أدخل علاماتك لننصحك بالتخصص الأنسب.
             </p>
-            <span class="mt-auto text-teal-400 font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-              إدخال البيانات <span>←</span>
-            </span>
+            <div class="flex items-center justify-between mt-auto">
+              <span class="text-teal-200 font-bold text-sm bg-teal-500/20 px-4 py-2 rounded-full border border-teal-500/30 group-hover:bg-teal-500 group-hover:text-white transition-colors">
+                إدخال البيانات
+              </span>
+            </div>
           </div>
         </div>
 
-        <div class="group relative bg-white/5 backdrop-blur-md rounded-3xl p-1 border border-white/10 hover:border-orange-400/50 transition-all duration-500 hover:-translate-y-2" @click="$router.push('/universities')">
-          <div class="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div 
+          @click="$router.push('/universities')"
+          class="group bg-white/10 backdrop-blur-lg rounded-[2rem] p-8 border border-white/10 hover:bg-white/15 hover:border-white/20 hover:-translate-y-2 transition-all duration-500 cursor-pointer relative overflow-hidden"
+        >
+          <div class="absolute inset-0 bg-gradient-to-br from-rose-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
-          <div class="relative h-full bg-gray-900/50 rounded-[22px] p-8 flex flex-col items-center text-center cursor-pointer overflow-hidden">
-            <div class="w-20 h-20 bg-orange-500/20 rounded-full flex items-center justify-center text-4xl mb-6 shadow-lg shadow-orange-500/20 group-hover:scale-110 transition-transform duration-500">
+          <div class="relative z-10">
+            <div class="w-16 h-16 bg-rose-500/20 text-rose-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner border border-white/5 group-hover:scale-110 transition-transform">
               🎓
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">دليل الجامعات</h3>
-            <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-              تصفح الجامعات الأردنية وتخصصاتها بأسلوب عصري وسهل.
+            <h3 class="text-2xl font-bold text-white mb-3">دليل الجامعات</h3>
+            <p class="text-blue-100/70 text-sm leading-relaxed mb-8">
+              تصفح كافة الجامعات والتخصصات.
             </p>
-            <span class="mt-auto text-orange-400 font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-              تصفح الدليل <span>←</span>
-            </span>
+            <div class="flex items-center justify-between mt-auto">
+              <span class="text-rose-200 font-bold text-sm bg-rose-500/20 px-4 py-2 rounded-full border border-rose-500/30 group-hover:bg-rose-500 group-hover:text-white transition-colors">
+                تصفح الدليل
+              </span>
+            </div>
           </div>
         </div>
 
@@ -108,16 +123,11 @@ function handleLogout() {
 </script>
 
 <style scoped>
-@keyframes blob {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0, 0) scale(1); }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.animate-blob {
-  animation: blob 10s infinite ease-in-out;
-}
-.animation-delay-2000 {
-  animation-delay: 2s;
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
 }
 </style>
