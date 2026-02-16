@@ -1,102 +1,81 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-950 to-slate-900 text-white flex items-center justify-center py-12 px-4" dir="rtl">
+  <div class="min-h-screen bg-[#F3F4F6] flex items-center justify-center py-12 px-4 font-sans text-slate-700" dir="rtl">
     
-    <div class="relative w-full max-w-3xl bg-white/5 backdrop-blur-xl rounded-[2rem] shadow-2xl border border-white/10 overflow-hidden animate-fade-in-up">
+    <div class="w-full max-w-3xl bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 overflow-hidden animate-fade-in-up">
       
-      <div class="absolute top-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-      
-      <div class="p-8 md:p-12">
-        <div class="text-center mb-10">
-          <div class="inline-block p-3 rounded-2xl bg-white/5 mb-4 border border-white/10">
-            <span class="text-4xl">📊</span>
-          </div>
-          <h1 class="text-3xl font-bold mb-3">تحليل القدرات الأكاديمية</h1>
-          <p class="text-gray-400 text-sm">أدخل بياناتك بدقة لنرشدك إلى المسار الصحيح.</p>
+      <div class="px-8 pt-8">
+        <button @click="$router.go(-1)" class="flex items-center gap-2 text-slate-400 hover:text-indigo-600 transition font-bold text-sm">
+          <span class="text-xl">➜</span> رجوع
+        </button>
+      </div>
+
+      <div class="text-center px-10 pb-8 pt-2">
+        <div class="inline-block p-4 rounded-3xl bg-indigo-50 text-indigo-600 shadow-sm mb-4 text-4xl">📊</div>
+        <h1 class="text-3xl font-black text-slate-800 mb-2">حساب المعدل وتحليل المسار</h1>
+        <p class="text-slate-500 font-medium">أدخل علاماتك الحقيقية لنقوم بحساب المعدل وتوجيهك بدقة.</p>
+      </div>
+
+      <div class="p-8 md:p-12 bg-slate-50/50">
+
+        <div class="grid grid-cols-2 gap-4 mb-10">
+          <button @click="academicStage = 'junior'" :class="academicStage === 'junior' ? 'bg-white text-indigo-700 border-indigo-200 shadow-md ring-1 ring-indigo-100' : 'bg-slate-100 text-slate-500 border-transparent hover:bg-white'" class="p-5 rounded-2xl border transition-all flex flex-col items-center gap-2">
+            <span class="text-2xl">🌱</span> <span class="font-bold">تأسيس (9-11)</span>
+          </button>
+          <button @click="academicStage = 'senior'" :class="academicStage === 'senior' ? 'bg-white text-purple-700 border-purple-200 shadow-md ring-1 ring-purple-100' : 'bg-slate-100 text-slate-500 border-transparent hover:bg-white'" class="p-5 rounded-2xl border transition-all flex flex-col items-center gap-2">
+            <span class="text-2xl">🎓</span> <span class="font-bold">توجيهي (12)</span>
+          </button>
         </div>
 
-        <div class="mb-10">
-          <label class="block text-gray-300 text-sm font-bold mb-4 text-center">اختر مرحلتك الدراسية</label>
-          <div class="grid grid-cols-2 gap-6">
-            <button 
-              @click="academicStage = 'junior'"
-              :class="academicStage === 'junior' ? 'bg-blue-600/20 border-blue-500 text-blue-200 shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'bg-white/5 border-transparent text-gray-400 hover:bg-white/10'"
-              class="p-4 rounded-2xl border-2 transition-all duration-300 flex flex-col items-center justify-center gap-2 group"
-            >
-              <span class="text-3xl group-hover:scale-110 transition">🌱</span>
-              <span class="font-bold">صفوف 9 - 11</span>
-            </button>
-
-            <button 
-              @click="academicStage = 'senior'"
-              :class="academicStage === 'senior' ? 'bg-teal-600/20 border-teal-500 text-teal-200 shadow-[0_0_20px_rgba(20,184,166,0.3)]' : 'bg-white/5 border-transparent text-gray-400 hover:bg-white/10'"
-              class="p-4 rounded-2xl border-2 transition-all duration-300 flex flex-col items-center justify-center gap-2 group"
-            >
-              <span class="text-3xl group-hover:scale-110 transition">🎓</span>
-              <span class="font-bold">توجيهي</span>
-            </button>
+        <div class="mb-8">
+          <label class="block text-slate-700 font-bold mb-3 text-lg">اختر الحقل الأكاديمي:</label>
+          <div class="relative">
+            <select v-model="selectedField" @change="resetGrades" class="w-full p-4 pl-10 rounded-2xl bg-white border border-slate-200 text-slate-700 font-bold focus:ring-4 focus:ring-indigo-100 focus:border-indigo-300 outline-none transition appearance-none cursor-pointer shadow-sm">
+              <option value="" disabled>اختر المسار...</option>
+              <option value="Health">الحقل الطبي والصحي</option>
+              <option value="Engineering">الحقل الهندسي</option>
+              <option value="IT">حقل العلوم والتكنولوجيا (IT)</option>
+              <option value="Languages">حقل اللغات والعلوم الاجتماعية</option>
+              <option value="Law">حقل القانون والعلوم الشرعية</option>
+              <option value="Business">حقل الأعمال</option>
+            </select>
+            <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">▼</div>
           </div>
         </div>
 
-        <transition name="fade" mode="out-in">
-          
-          <div v-if="academicStage === 'junior'" key="junior" class="space-y-8">
-            <div class="bg-blue-500/10 p-5 rounded-2xl border border-blue-500/20">
-              <label class="block text-blue-200 font-bold mb-3">طموحك المستقبلي 🎯</label>
-              <select v-model="targetField" class="w-full bg-gray-900/80 text-white border border-white/20 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none transition cursor-pointer">
-                <option value="" disabled>اختر الحقل المستهدف...</option>
-                <option value="Health">الحقل الطبي والصحي</option>
-                <option value="Engineering">الحقل الهندسي</option>
-                <option value="IT">حقل العلوم والتكنولوجيا (IT)</option>
-                <option value="Business">حقل الأعمال</option>
-                <option value="Law">القانون والعلوم الشرعية</option>
-                <option value="Languages">اللغات والعلوم الاجتماعية</option>
-              </select>
+        <transition name="fade">
+          <div v-if="selectedField" class="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-8 mb-8">
+            <div class="flex items-center gap-3 mb-8 border-b border-slate-100 pb-4">
+              <span class="bg-blue-100 text-blue-600 p-2 rounded-xl text-lg">📝</span>
+              <h3 class="font-bold text-slate-700 text-lg">علامات المواد الأساسية</h3>
             </div>
-
-            <div v-if="targetField" class="space-y-6">
-              <p class="text-sm text-gray-400 border-b border-white/10 pb-2">قيّم مستواك في المواد التالية:</p>
-              
-              <div v-for="(val, key) in grades" :key="key">
-                <div class="flex justify-between mb-2">
-                  <label class="text-gray-300 font-bold text-sm">{{ getSubjectLabel(key) }}</label>
-                  <span class="font-mono font-bold text-blue-400">{{ val }}%</span>
+            
+            <div class="space-y-8">
+              <div v-for="(label, key) in currentSubjects" :key="key">
+                <div class="flex justify-between mb-3 items-end">
+                  <label class="font-bold text-slate-700 text-lg">{{ label }}</label>
+                  <div :class="getScoreColorClass(grades[key])" class="px-3 py-1 rounded-lg font-mono font-bold text-sm">
+                    {{ grades[key] || 0 }}%
+                  </div>
                 </div>
-                <input type="range" v-model.number="grades[key]" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500 hover:accent-blue-400 transition-all">
+                <input type="range" v-model.number="grades[key]" min="0" max="100" class="w-full h-4 bg-slate-100 rounded-full appearance-none cursor-pointer accent-indigo-600 hover:accent-indigo-500 transition-all">
+                
+                <div class="flex justify-between text-xs font-medium text-slate-400 mt-2">
+                  <span>راسب</span>
+                  <span>ضعيف</span>
+                  <span>جيد</span>
+                  <span>ممتاز</span>
+                </div>
               </div>
             </div>
           </div>
-
-          <div v-else key="senior" class="space-y-8">
-            <div class="bg-teal-500/10 p-5 rounded-2xl border border-teal-500/20">
-              <label class="block text-teal-200 font-bold mb-3">مسارك الحالي 🏫</label>
-              <select v-model="currentField" class="w-full bg-gray-900/80 text-white border border-white/20 rounded-xl p-3 focus:ring-2 focus:ring-teal-500 outline-none transition cursor-pointer">
-                <option value="" disabled>اختر المسار...</option>
-                <option value="Health">الحقل الطبي والصحي</option>
-                <option value="Engineering">الحقل الهندسي</option>
-                <option value="IT">حقل العلوم والتكنولوجيا (IT)</option>
-                <option value="Business">حقل الأعمال</option>
-                <option value="Law">القانون والعلوم الشرعية</option>
-                <option value="Languages">اللغات والعلوم الاجتماعية</option>
-              </select>
-            </div>
-
-            <div v-if="currentField">
-              <div class="flex justify-between mb-2">
-                <label class="text-gray-300 font-bold">المعدل العام المتوقع</label>
-                <span class="font-mono font-bold text-teal-400">{{ gpa }}%</span>
-              </div>
-              <input type="range" v-model.number="gpa" min="50" max="100" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-teal-500 hover:accent-teal-400 transition-all">
-            </div>
-          </div>
-
         </transition>
 
         <button 
-          @click="submitAnalysis" 
-          :disabled="(academicStage === 'junior' && !targetField) || (academicStage === 'senior' && !currentField)"
-          class="w-full mt-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-lg font-bold rounded-xl shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+          @click="submit" 
+          :disabled="!selectedField"
+          class="w-full py-5 bg-slate-900 hover:bg-black text-white text-xl font-bold rounded-2xl shadow-xl shadow-slate-200 hover:shadow-2xl hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {{ academicStage === 'junior' ? 'تحليل الخطة 📋' : 'عرض التخصصات 🎓' }}
+          {{ academicStage === 'junior' ? 'تحليل نقاط الضعف 🛠️' : 'حساب المعدل والنتيجة 🎓' }}
         </button>
 
       </div>
@@ -105,52 +84,63 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const academicStage = ref('junior')
+const selectedField = ref('')
+const grades = ref({})
 
-// Data
-const targetField = ref('')
-const grades = ref({ math: 70, science: 70, tech: 70, lang: 70 })
-const currentField = ref('')
-const gpa = ref(80)
-
-function getSubjectLabel(key) {
-  const map = { math: 'الرياضيات', science: 'العلوم', tech: 'الحاسوب', lang: 'اللغات' }
-  return map[key] || key
+// المواد كما طلبت بالضبط (بدون اختياري، فقط الأساسي للحساب)
+const curriculum = {
+  'Health': { chem: 'الكيمياء', bio: 'الأحياء', eng_adv: 'إنجليزي متقدم' },
+  'Engineering': { math: 'الرياضيات', physics: 'الفيزياء' },
+  'IT': { math_adv: 'رياضيات متقدم' },
+  'Languages': { eng_adv: 'إنجليزي متقدم', arabic_spec: 'عربي تخصص' },
+  'Law': { arabic_spec: 'عربي تخصص', islamic_spec: 'تربية إسلامية تخصص' },
+  'Business': { finance: 'ثقافة مالية', math_biz: 'رياضيات أعمال', eng_adv: 'إنجليزي متقدم' }
 }
 
-function submitAnalysis() {
-  const query = { stage: academicStage.value }
+const currentSubjects = computed(() => {
+  return selectedField.value ? curriculum[selectedField.value] : {}
+})
 
-  if (academicStage.value === 'junior') {
-    query.targetField = targetField.value
-    query.grades = JSON.stringify(grades.value)
-  } else {
-    query.currentField = currentField.value
-    query.gpa = gpa.value
-  }
+function resetGrades() {
+  grades.value = {}
+}
 
-  router.push({ path: '/results', query })
+function getScoreColorClass(score) {
+  if (!score) return 'bg-slate-100 text-slate-500'
+  if (score >= 85) return 'bg-green-100 text-green-700'
+  if (score >= 70) return 'bg-blue-100 text-blue-700'
+  if (score >= 50) return 'bg-orange-100 text-orange-700'
+  return 'bg-red-100 text-red-700'
+}
+
+function submit() {
+  // حساب المعدل الحقيقي هنا (Weighted Average بسيط مبدئياً)
+  const scores = Object.values(grades.value)
+  const total = scores.reduce((a, b) => a + b, 0)
+  const count = scores.length || 1
+  const calculatedGPA = Math.round(total / count)
+
+  router.push({
+    path: '/results',
+    query: {
+      source: 'grades',
+      stage: academicStage.value,
+      field: selectedField.value,
+      grades: JSON.stringify(grades.value),
+      gpa: calculatedGPA // نرسل المعدل المحسوب وليس السلايدر
+    }
+  })
 }
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-
-/* Custom Animation */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
+.fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
+.animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
