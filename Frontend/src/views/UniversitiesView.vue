@@ -96,13 +96,24 @@
               </div>
             </div>
 
-            <a 
-              :href="uni.website" 
-              target="_blank"
-              class="mt-6 block w-full py-2.5 text-center bg-gray-50 hover:bg-blue-600 hover:text-white text-gray-700 font-bold rounded-xl transition duration-300 border border-gray-200 hover:border-blue-600"
-            >
-              زيارة الموقع الرسمي 🌐
-            </a>
+            <div class="mt-6 flex gap-2">
+  <button 
+    @click="$router.push({ name: 'university-details', params: { id: uni.id } })"
+    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl font-bold transition shadow-md flex items-center justify-center gap-2"
+  >
+    <span>تصفح التخصصات</span>
+    <span>📋</span>
+  </button>
+
+  <a 
+    :href="uni.website" 
+    target="_blank"
+    class="w-12 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl border border-gray-200 transition"
+    title="زيارة موقع الجامعة"
+  >
+    🌐
+  </a>
+</div>
           </div>
         </div>
       </div>
