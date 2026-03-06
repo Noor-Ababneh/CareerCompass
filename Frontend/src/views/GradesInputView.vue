@@ -25,13 +25,13 @@
       <div class="mb-12 text-center">
         <div class="inline-flex items-center gap-3 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl px-5 py-2.5 mb-6">
           <span class="text-indigo-400 text-lg">⚡</span>
-          <span class="text-indigo-300 font-bold text-sm tracking-wide">تحليل ذكي للمسار الأكاديمي</span>
+          <span class="text-indigo-300 font-bold text-sm tracking-wide">تحليل للمسار الأكاديمي</span>
         </div>
         <h1 class="font-display text-4xl md:text-5xl font-black text-white mb-4 leading-tight tracking-tight">
           إدخال العلامات
         </h1>
         <p class="text-slate-400 text-base font-medium leading-relaxed max-w-md mx-auto">
-          أدخل علاماتك بدقة وسيقوم النظام بتحليل وضعك الأكاديمي وبناء خطة مخصصة لك كطالب أردني.
+   هون إدخال العلامات 
         </p>
       </div>
 
