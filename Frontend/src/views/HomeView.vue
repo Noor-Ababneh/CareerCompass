@@ -23,19 +23,19 @@
         <div class="lg:w-1/2 text-center lg:text-right space-y-8">
           
           <div class="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-white border border-slate-200 shadow-sm text-blue-700 text-sm font-bold animate-fade-in-up">
-            <span>✨</span> دليلك الأكاديمي الذكي
+            <span>✨</span> دليلك الأكاديمي غير الذكي
           </div>
           
           <h1 class="text-4xl md:text-6xl font-black text-slate-800 leading-[1.3]">
             لا تترك مستقبلك <br/>
             <span class="relative inline-block">
-              <span class="relative z-10 text-blue-700">للصدفة.</span>
+              <span class="relative z-10 text-blue-700">الai  بده نكتب لا تترك مستقبلك للصدفة بس كرنج ما بدي.</span>
               <span class="absolute bottom-3 left-0 w-full h-3 bg-blue-200/50 -z-0 rounded-full"></span>
             </span>
           </h1>
           
           <p class="text-lg text-slate-600 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium">
-            اكتشف شغفك الحقيقي، قارن قدراتك، واختر تخصصك الجامعي بناءً على تحليل دقيق وليس مجرد تخمينات.
+            اكتشف شغفك الحقيقي، قارن قدراتك، واختر تخصصك الجامعي بناءا (مش عارفة أكتب بناءا) على تحليل دقيق وليس مجرد تخمينات.
           </p>
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
@@ -53,16 +53,16 @@
           <div class="absolute -inset-4 bg-gradient-to-tr from-blue-200 to-purple-200 rounded-[2.5rem] -z-10 rotate-2 group-hover:rotate-3 transition-transform duration-500 opacity-60"></div>
           
           <div class="relative rounded-2xl overflow-hidden shadow-2xl border-[6px] border-white bg-white aspect-video transform transition duration-500 hover:scale-[1.01]">
-            <iframe 
-              class="w-full h-full" 
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" 
-              title="CareerCompass Intro" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-            <div class="absolute inset-0 bg-blue-900/5 pointer-events-none"></div>
-          </div>
+  <iframe 
+    class="w-full h-full" 
+    src="https://www.youtube.com/embed/jNQXAC9IVRw" 
+    title="CareerCompass Intro" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+  <div class="absolute inset-0 bg-blue-900/5 pointer-events-none"></div>
+</div>
         </div>
       </div>
 
@@ -115,9 +115,9 @@
           <p class="text-sm text-slate-500 font-medium">جميع الحقوق محفوظة © 2026</p>
         </div>
         <div class="flex gap-6 text-sm font-bold text-slate-600">
-          <a href="#" class="hover:text-blue-700 transition">عن الموقع</a>
-          <a href="#" class="hover:text-blue-700 transition">سياسة الخصوصية</a>
-          <a href="#" class="hover:text-blue-700 transition">اتصل بنا</a>
+          <a href="#" class="hover:text-blue-700 transition">عن الموقع وبنحط لينك</a>
+          <a href="#" class="hover:text-blue-700 transition">سياسة الخصوصية وبنكتب أشياء كذب</a>
+          <a href="#" class="hover:text-blue-700 transition">اتصل بنا وبنحط ايميل ههه على أساس حد حيستخدم</a>
         </div>
       </div>
     </footer>
