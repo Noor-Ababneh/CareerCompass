@@ -6,9 +6,10 @@ import LoginView from '../views/LoginView.vue'
 import SignupView from '../views/SignupView.vue'
 import DashboardView from '../views/DashboardView.vue'
 
-// 2. استدعاء الصفحات الجديدة (Assessment & Results)
+// 2. استدعاء صفحات التقييم والنتائج
 import AssessmentView from '../views/AssessmentView.vue'
-import ResultsView from '../views/ResultsView.vue'
+import AssessmentResultsView from '../views/AssessmentResultsView.vue'
+import ImprovementPlanView from '../views/ImprovementPlanView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,21 +34,28 @@ const router = createRouter({
       name: 'dashboard',
       component: DashboardView
     },
-    // --- المسارات الجديدة ---
+    // --- مسار الاختبار ---
     {
       path: '/assessment',
       name: 'assessment',
       component: AssessmentView
     },
+    // --- مسار نتائج الاختبار (الصفحة الذهبية) ---
     {
-      path: '/results',
-      name: 'results',
-      component: ResultsView
+      path: '/assessment-results',
+      name: 'assessment-results',
+      component: AssessmentResultsView
     },
+    // --- مسار خطة تطوير العلامات ---
+    {
+      path: '/improvement-plan',
+      name: 'improvement-plan',
+      component: ImprovementPlanView
+    },
+    // --- مسارات الجامعات ---
     {
       path: '/grades-input',
       name: 'grades-input',
-      // Lazy loading (تحميل عند الطلب) أفضل للأداء
       component: () => import('../views/GradesInputView.vue')
     },
     {
@@ -56,11 +64,10 @@ const router = createRouter({
       component: () => import('../views/UniversitiesView.vue')
     },
     {
-      // المسار الديناميكي لتفاصيل الجامعة
       path: '/university/:id', 
       name: 'university-details',
       component: () => import('../views/UniversityDetails.vue'),
-      props: true // ضروري جداً لتمرير رقم الجامعة للصفحة
+      props: true
     }
   ]
 })
