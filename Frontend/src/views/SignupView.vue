@@ -1,33 +1,42 @@
 <template>
-  <div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-teal-500" dir="rtl">
-<button 
-      @click="router.push('/')" 
-      class="absolute top-6 right-6 z-50 flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white font-semibold hover:bg-white/30 transition shadow-lg"
-    >
-      <span>🏠</span> الصفحة الرئيسية
-    </button>
-    <div class="absolute w-72 h-72 bg-blue-400 rounded-full opacity-20 blur-3xl animate-blob top-10 right-10"></div>
-    <div class="absolute w-72 h-72 bg-teal-400 rounded-full opacity-20 blur-3xl animate-blob animation-delay-2000 bottom-10 left-10"></div>
+  <div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#F8FAFC] font-sans selection:bg-[#4F46E5] selection:text-white" dir="rtl">
 
-    <div class="relative w-full max-w-md backdrop-blur-lg bg-white/90 border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500 animate-fade-in">
+    <div class="absolute inset-0 z-0 opacity-[0.03]" style="background-image: radial-gradient(#1E293B 1.5px, transparent 1.5px); background-size: 32px 32px;"></div>
+    
+    <div class="absolute w-[500px] h-[500px] bg-[#4F46E5]/10 rounded-full blur-[100px] animate-blob top-[-10%] right-[-10%] pointer-events-none z-0"></div>
+    <div class="absolute w-[400px] h-[400px] bg-[#10B981]/10 rounded-full blur-[120px] animate-blob animation-delay-3000 bottom-[-10%] left-[-10%] pointer-events-none z-0"></div>
+
+    <button 
+      @click="router.push('/')" 
+      class="absolute top-6 right-6 z-50 flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl text-slate-600 font-bold hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all shadow-sm group"
+    >
+      <span class="group-hover:-translate-x-1 transition-transform">←</span>
+      <span>الرئيسية</span>
+    </button>
+
+    <div class="relative w-full max-w-md bg-white/90 backdrop-blur-xl rounded-[2.5rem] shadow-[0_15px_50px_-15px_rgba(79,70,229,0.15)] p-10 animate-fade-in border border-white z-10">
 
       <button 
+        v-if="step === 2"
         type="button"
-        @click="router.back()" 
-        class="absolute top-6 left-6 text-gray-400 hover:text-blue-600 transition duration-300 flex items-center gap-1 font-medium text-sm"
+        @click="step = 1" 
+        class="absolute top-8 left-8 text-slate-400 hover:text-[#4F46E5] transition duration-300 flex items-center gap-1 font-bold text-sm"
         title="رجوع"
       >
-        <span class="text-xl transform rotate-180">➜</span> رجوع
+        <span class="transform rotate-180">➜</span> رجوع
       </button>
 
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-blue-900">CareerCompass</h1>
-        <p class="text-gray-600 mt-2 text-sm">
-          ابدأ رحلتك الأكاديمية بثقة ✨
+        <div class="w-12 h-12 mx-auto bg-[#4F46E5]/10 text-[#4F46E5] rounded-xl flex items-center justify-center text-xl mb-4 shadow-sm border border-[#4F46E5]/10">
+          ✨
+        </div>
+        <h1 class="text-3xl font-black text-[#1E293B]">Career<span class="text-[#4F46E5]">Compass</span></h1>
+        <p class="text-slate-500 mt-2 text-sm font-medium">
+          ابدأ رحلتك الأكاديمية بثقة
         </p>
       </div>
 
-      <div class="flex justify-center mb-6 space-x-4 space-x-reverse">
+      <div class="flex justify-center mb-8 gap-3">
         <div :class="step === 1 ? activeStep : inactiveStep">1</div>
         <div :class="step === 2 ? activeStep : inactiveStep">2</div>
       </div>
@@ -56,8 +65,8 @@
 
         <div v-if="step === 2" class="space-y-6">
 
-          <h3 class="text-center text-gray-700 font-medium">
-            اختر صفك الدراسي
+          <h3 class="text-center text-slate-700 font-bold mb-2">
+            في أي مرحلة دراسية أنت الآن؟
           </h3>
 
           <div class="grid grid-cols-2 gap-4">
@@ -82,22 +91,13 @@
           >
             إنشاء الحساب
           </button>
-
-          <button
-            type="button"
-            @click="step = 1"
-            class="text-sm text-gray-500 hover:text-blue-700 transition"
-          >
-            رجوع
-          </button>
-
         </div>
 
       </form>
 
-      <div class="text-center mt-8 text-sm">
-        لديك حساب؟
-        <router-link to="/login" class="text-teal-600 font-semibold hover:underline">
+      <div class="text-center mt-8 text-sm text-slate-500 font-medium">
+        لديك حساب بالفعل؟
+        <router-link to="/login" class="text-[#10B981] font-black hover:text-[#059669] hover:underline transition duration-300 px-1">
           تسجيل الدخول
         </router-link>
       </div>
@@ -127,8 +127,9 @@ const grades = [
   { value: "12", label: "التوجيهي" }
 ]
 
-const activeStep = "w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold"
-const inactiveStep = "w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center"
+// ألوان الدوائر تبعت الخطوات (Steps)
+const activeStep = "w-8 h-8 rounded-full bg-[#4F46E5] text-white flex items-center justify-center font-bold shadow-md shadow-[#4F46E5]/30 transition-all duration-300"
+const inactiveStep = "w-8 h-8 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-bold transition-all duration-300"
 
 function nextStep() {
   if (step.value === 1) {
@@ -153,51 +154,47 @@ function selectGrade(val) {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap');
+.font-sans { font-family: 'Tajawal', sans-serif; }
+
 /* Floating Input Logic */
 .floating-input {
-  @apply w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 bg-white/80 focus:outline-none focus:ring-2 focus:ring-teal-400 transition;
+  @apply w-full border border-slate-200 rounded-2xl px-4 pt-6 pb-2 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#4F46E5]/50 focus:ring-4 focus:ring-[#4F46E5]/10 transition-all shadow-sm text-[#1E293B] font-medium;
 }
 .floating-label {
-  @apply absolute right-4 top-3 text-gray-500 text-sm transition-all pointer-events-none;
+  @apply absolute right-4 top-3 text-slate-400 text-sm transition-all pointer-events-none font-bold;
 }
 .floating-input:focus + .floating-label,
 .floating-input:not(:placeholder-shown) + .floating-label {
-  @apply text-xs text-blue-600 top-1 font-semibold;
+  @apply text-xs text-[#4F46E5] top-1;
 }
 
-/* Buttons */
+/* Primary Button */
 .primary-btn {
-  @apply w-full h-12 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-xl font-semibold shadow-md hover:scale-[1.02] transition transform disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply w-full h-12 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-2xl font-black text-lg transition-all duration-300 shadow-lg shadow-[#4F46E5]/25 hover:-translate-y-1 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0;
 }
 
-/* Grade Cards */
+/* Grade Cards (بطاقات اختيار الصف) */
 .grade-card {
-  @apply p-4 rounded-xl border border-gray-300 bg-white hover:shadow-md transition text-sm text-gray-600 font-medium;
+  @apply p-4 rounded-xl border border-slate-200 bg-[#F8FAFC] hover:border-[#4F46E5]/30 hover:bg-white hover:shadow-md transition-all duration-300 text-sm text-slate-600 font-bold;
 }
 .grade-active {
-  @apply border-blue-600 bg-blue-50 text-blue-700 font-bold ring-2 ring-blue-200;
+  @apply border-[#4F46E5] bg-[#4F46E5]/5 text-[#4F46E5] ring-2 ring-[#4F46E5]/20 shadow-sm;
 }
 
-/* Animation Keyframes */
+/* Animations */
 @keyframes blob {
   0% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(30px, -50px) scale(1.1); }
   66% { transform: translate(-20px, 20px) scale(0.9); }
   100% { transform: translate(0, 0) scale(1); }
 }
-.animate-blob {
-  animation: blob 10s infinite ease-in-out;
-}
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-/* Animation Keyframes */
+.animate-blob { animation: blob 15s infinite ease-in-out; }
+.animation-delay-3000 { animation-delay: 3s; }
+
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards; /* forwards مهمة عشان تثبت الحركة */
-}
+.animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
 </style>

@@ -1,23 +1,27 @@
 <template>
-  <div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-teal-500" dir="rtl">
+  <div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#F8FAFC] font-sans selection:bg-[#4F46E5] selection:text-white" dir="rtl">
+
+    <div class="absolute inset-0 z-0 opacity-[0.03]" style="background-image: radial-gradient(#1E293B 1.5px, transparent 1.5px); background-size: 32px 32px;"></div>
+    
+    <div class="absolute w-[500px] h-[500px] bg-[#4F46E5]/10 rounded-full blur-[100px] animate-blob top-[-10%] left-[-10%] pointer-events-none z-0"></div>
+    <div class="absolute w-[400px] h-[400px] bg-[#10B981]/10 rounded-full blur-[120px] animate-blob animation-delay-3000 bottom-[-10%] right-[-10%] pointer-events-none z-0"></div>
 
     <button 
       @click="router.push('/')" 
-      class="absolute top-6 right-6 z-50 flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white font-semibold hover:bg-white/30 transition shadow-lg"
+      class="absolute top-6 right-6 z-50 flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl text-slate-600 font-bold hover:text-[#4F46E5] hover:border-[#4F46E5]/30 transition-all shadow-sm group"
     >
-      <span>🏠</span> الصفحة الرئيسية
+      <span class="group-hover:-translate-x-1 transition-transform">←</span>
+      <span>الرئيسية</span>
     </button>
 
-    <div class="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-
-    <div class="absolute w-96 h-96 bg-teal-300 rounded-full opacity-20 blur-3xl animate-blob top-[-100px] left-[-100px]"></div>
-    <div class="absolute w-96 h-96 bg-blue-300 rounded-full opacity-20 blur-3xl animate-blob animation-delay-3000 bottom-[-100px] right-[-100px]"></div>
-
-    <div class="relative w-full max-w-md bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-10 animate-fade-in border border-white/50">
+    <div class="relative w-full max-w-md bg-white/90 backdrop-blur-xl rounded-[2.5rem] shadow-[0_15px_50px_-15px_rgba(79,70,229,0.15)] p-10 animate-fade-in border border-white z-10">
 
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-blue-800">أهلاً بعودتك 👋</h1>
-        <p class="text-gray-600 mt-2 text-sm">
+        <div class="w-12 h-12 mx-auto bg-[#4F46E5]/10 text-[#4F46E5] rounded-xl flex items-center justify-center text-xl mb-4 shadow-sm border border-[#4F46E5]/10">
+          👋
+        </div>
+        <h1 class="text-3xl font-black text-[#1E293B]">أهلاً بعودتك</h1>
+        <p class="text-slate-500 mt-2 text-sm font-medium">
           سجل دخولك لمتابعة رحلتك الأكاديمية
         </p>
       </div>
@@ -42,19 +46,19 @@
           <button
             type="button"
             @click="showPassword = !showPassword"
-            class="absolute left-4 top-4 text-gray-500 hover:text-blue-600 transition text-sm"
+            class="absolute left-4 top-4 text-slate-400 hover:text-[#4F46E5] transition text-sm font-bold"
           >
             {{ showPassword ? 'إخفاء' : 'إظهار' }}
           </button>
         </div>
 
         <div class="flex items-center justify-between text-sm">
-          <label class="flex items-center gap-2 cursor-pointer text-gray-700">
-            <input type="checkbox" v-model="remember" class="accent-teal-500 w-4 h-4" />
+          <label class="flex items-center gap-2 cursor-pointer text-slate-600 font-medium">
+            <input type="checkbox" v-model="remember" class="accent-[#4F46E5] w-4 h-4 rounded border-slate-300" />
             تذكرني
           </label>
 
-          <a href="#" class="text-blue-600 hover:underline font-medium">
+          <a href="#" class="text-[#4F46E5] hover:text-[#4338CA] hover:underline font-bold transition-colors">
             نسيت كلمة المرور؟
           </a>
         </div>
@@ -62,7 +66,7 @@
         <button
           type="submit"
           :disabled="loading"
-          class="w-full h-12 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-xl font-semibold shadow-lg hover:scale-[1.03] hover:shadow-xl transition-all duration-300 transform flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+          class="w-full h-12 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-2xl font-black text-lg transition-all duration-300 shadow-lg shadow-[#4F46E5]/25 hover:-translate-y-1 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
         >
           <span v-if="!loading">تسجيل الدخول</span>
           <span v-else class="loader"></span>
@@ -70,11 +74,11 @@
 
       </form>
 
-     <div class="text-center mt-8 text-sm text-gray-600">
+      <div class="text-center mt-8 text-sm text-slate-500 font-medium">
         ليس لديك حساب؟
         <router-link 
           to="/signup" 
-          class="text-orange-500 font-bold hover:text-orange-600 hover:underline transition duration-300 ease-in-out"
+          class="text-[#10B981] font-black hover:text-[#059669] hover:underline transition duration-300 ease-in-out px-1"
         >
           إنشاء حساب جديد
         </router-link>
@@ -113,16 +117,19 @@ function handleLogin() {
 </script>
 
 <style scoped>
-/* Floating Input Logic */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap');
+.font-sans { font-family: 'Tajawal', sans-serif; }
+
+/* Floating Input Logic - Updated with new colors */
 .floating-input {
-  @apply w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 bg-white focus:outline-none focus:ring-2 focus:ring-teal-400 transition shadow-sm;
+  @apply w-full border border-slate-200 rounded-2xl px-4 pt-6 pb-2 bg-[#F8FAFC] focus:bg-white focus:outline-none focus:border-[#4F46E5]/50 focus:ring-4 focus:ring-[#4F46E5]/10 transition-all shadow-sm text-[#1E293B] font-medium;
 }
 .floating-label {
-  @apply absolute right-4 top-3 text-gray-500 text-sm transition-all pointer-events-none;
+  @apply absolute right-4 top-3 text-slate-400 text-sm transition-all pointer-events-none font-bold;
 }
 .floating-input:focus + .floating-label,
 .floating-input:not(:placeholder-shown) + .floating-label {
-  @apply text-xs text-blue-600 top-1 font-bold;
+  @apply text-xs text-[#4F46E5] top-1;
 }
 
 /* Loader Animation */
