@@ -137,27 +137,19 @@
         جميع بياناتك مشفرة ومحفوظة بأمان. النتائج المعروضة هي للإرشاد الأكاديمي.
       </p>
     </main>
-    <!-- User Data Modal -->
-    <UserModal 
-      :is-open="isModalOpen" 
-      @close="isModalOpen = false" 
-    />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import UserModal from '@/components/UserModal.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
 
-const isModalOpen = ref(false)
-
 function openModal() {
-  isModalOpen.value = true
+  router.push('/signup?redirect=/dashboard')
 }
 
 // ☀️ رسالة ترحيب ذكية تتغير حسب وقت اليوم بتوقيت إربد

@@ -23,10 +23,6 @@
       
       <div class="flex items-center gap-5">
         <template v-if="authStore.isAuthenticated">
-          <div class="hidden md:flex flex-col items-start ml-2">
-            <span class="text-xs font-bold text-slate-400">مرحباً بك،</span>
-            <span class="text-sm font-black text-indigo-600">{{ authStore.user?.name }}</span>
-          </div>
           <button @click="openModal" class="relative overflow-hidden bg-white border border-indigo-200 text-indigo-600 px-7 py-2.5 rounded-xl font-bold transition-all duration-300 shadow-sm hover:shadow-indigo-500/10 hover:-translate-y-0.5 group">
             <span class="relative z-10">تبديل المستخدم</span>
           </button>
@@ -41,6 +37,20 @@
     </nav>
 
     <main class="relative z-10 max-w-7xl mx-auto px-6 pt-6 pb-12 md:pt-10 lg:pt-12">
+      <div v-if="authStore.isAuthenticated && authStore.user?.gender" class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mb-4 anim-fade-up">
+        
+        <div class="flex flex-col items-center md:items-end text-center md:text-right z-10">
+          <span class="text-xl md:text-2xl font-bold text-slate-500 mb-1">مرحباً بك،</span>
+          <span class="text-4xl md:text-5xl font-black text-indigo-600 tracking-tight">{{ authStore.user?.name }}</span>
+        </div>
+
+        <div class="relative animate-float -my-6 md:-my-8">
+          <img v-if="authStore.user?.gender === 'female'" src="@/assets/avatars/girl.gif" alt="Girl Avatar" class="w-48 md:w-56 object-contain drop-shadow-2xl transform hover:scale-105 transition-transform duration-500" />
+          <img v-else-if="authStore.user?.gender === 'male'" src="@/assets/avatars/boy.gif" alt="Boy Avatar" class="w-72 md:w-96 lg:w-[28rem] object-contain drop-shadow-2xl transform hover:scale-105 transition-transform duration-500" />
+        </div>
+        
+      </div>
+
       <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
         
         <div class="flex-1 text-center lg:text-right relative z-20">
@@ -161,45 +171,25 @@
       </div>
     </section>
 
-    <!-- User Data Modal -->
-    <UserModal 
-      :is-open="isModalOpen" 
-      @close="isModalOpen = false" 
-      @saved="onUserSaved"
-    />
-
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import UserModal from '@/components/UserModal.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
 
-const isModalOpen = ref(false)
-const pendingRoute = ref(null)
-
 function openModal() {
-  isModalOpen.value = true
+  router.push('/signup')
 }
 
 function handleAction(route) {
   if (authStore.isAuthenticated) {
     router.push(route)
   } else {
-    pendingRoute.value = route
-    openModal()
-  }
-}
-
-function onUserSaved() {
-  if (pendingRoute.value) {
-    router.push(pendingRoute.value)
-    pendingRoute.value = null
+    router.push(`/signup?redirect=${route}`)
   }
 }
 </script>
@@ -223,6 +213,13 @@ function onUserSaved() {
 
 @keyframes shimmer { 100% { transform: translateX(100%); } }
 .animate-shimmer { animation: shimmer 2.5s infinite; }
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float { animation: float 4s ease-in-out infinite; }
 
 .anim-fade-up { animation: fadeUp 0.8s 0.2s ease-out both; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }

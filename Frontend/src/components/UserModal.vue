@@ -59,6 +59,38 @@
             </div>
 
             <div class="space-y-3">
+              <label class="block text-sm font-black text-slate-700 pr-2">الجنس</label>
+              <div class="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  @click="form.gender = 'male'"
+                  :class="[
+                    'py-3.5 px-4 rounded-xl font-bold text-sm transition-all border-2 flex items-center justify-center gap-2',
+                    form.gender === 'male' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-500/30' 
+                      : 'bg-white border-slate-100 text-slate-600 hover:border-indigo-200 hover:bg-indigo-50/50'
+                  ]"
+                >
+                  <span v-if="form.gender === 'male'">✓</span>
+                  👨 ذكر
+                </button>
+                <button
+                  type="button"
+                  @click="form.gender = 'female'"
+                  :class="[
+                    'py-3.5 px-4 rounded-xl font-bold text-sm transition-all border-2 flex items-center justify-center gap-2',
+                    form.gender === 'female' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-500/30' 
+                      : 'bg-white border-slate-100 text-slate-600 hover:border-indigo-200 hover:bg-indigo-50/50'
+                  ]"
+                >
+                  <span v-if="form.gender === 'female'">✓</span>
+                  👩 أنثى
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-3">
               <label class="block text-sm font-black text-slate-700 pr-2">المرحلة الدراسية</label>
               <div class="grid grid-cols-2 gap-3">
                 <button
@@ -108,6 +140,7 @@ const authStore = useAuthStore()
 const form = reactive({
   name: '',
   email: '',
+  gender: '',
   gradeLevel: ''
 })
 
@@ -123,21 +156,24 @@ watch(() => props.isOpen, (newVal) => {
     if (props.initialData) {
       form.name = props.initialData.name || ''
       form.email = props.initialData.email || ''
+      form.gender = props.initialData.gender || ''
       form.gradeLevel = props.initialData.gradeLevel || ''
     } else if (authStore.user) {
       form.name = authStore.user.name || ''
       form.email = authStore.user.email || ''
+      form.gender = authStore.user.gender || ''
       form.gradeLevel = authStore.user.gradeLevel || ''
     } else {
       form.name = ''
       form.email = ''
+      form.gender = ''
       form.gradeLevel = ''
     }
   }
 })
 
 const isFormValid = computed(() => {
-  return form.name.trim().length > 0 && form.gradeLevel.length > 0
+  return form.name.trim().length > 0 && form.gender.length > 0 && form.gradeLevel.length > 0
 })
 
 function close() {
@@ -150,6 +186,7 @@ function handleSubmit() {
   authStore.saveUser({
     name: form.name,
     email: form.email,
+    gender: form.gender,
     gradeLevel: form.gradeLevel
   })
   
