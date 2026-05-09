@@ -22,13 +22,21 @@
       </div>
       
       <div class="flex items-center gap-5">
-        <button @click="$router.push('/login')" class="hidden md:block text-slate-500 font-bold hover:text-indigo-600 transition-colors">
-          تسجيل الدخول
-        </button>
-        <button @click="$router.push('/signup')" class="relative overflow-hidden bg-indigo-600 text-white px-7 py-2.5 rounded-xl font-bold transition-all duration-300 shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/40 hover:-translate-y-0.5 group">
-          <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
-          <span class="relative z-10">ابدأ رحلتك مجاناً</span>
-        </button>
+        <template v-if="authStore.isAuthenticated">
+          <div class="hidden md:flex flex-col items-start ml-2">
+            <span class="text-xs font-bold text-slate-400">مرحباً بك،</span>
+            <span class="text-sm font-black text-indigo-600">{{ authStore.user?.name }}</span>
+          </div>
+          <button @click="openModal" class="relative overflow-hidden bg-white border border-indigo-200 text-indigo-600 px-7 py-2.5 rounded-xl font-bold transition-all duration-300 shadow-sm hover:shadow-indigo-500/10 hover:-translate-y-0.5 group">
+            <span class="relative z-10">تبديل المستخدم</span>
+          </button>
+        </template>
+        <template v-else>
+          <button @click="openModal" class="relative overflow-hidden bg-indigo-600 text-white px-7 py-2.5 rounded-xl font-bold transition-all duration-300 shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/40 hover:-translate-y-0.5 group">
+            <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+            <span class="relative z-10">ابدأ رحلتك مجاناً</span>
+          </button>
+        </template>
       </div>
     </nav>
 
@@ -56,11 +64,11 @@
           </p>
 
           <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-            <button @click="$router.push('/assessment')" class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-10 py-4 rounded-2xl font-black text-lg transition-all duration-300 shadow-lg shadow-indigo-500/30 hover:-translate-y-1 flex items-center justify-center gap-3 group">
+            <button @click="handleAction('/assessment')" class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-10 py-4 rounded-2xl font-black text-lg transition-all duration-300 shadow-lg shadow-indigo-500/30 hover:-translate-y-1 flex items-center justify-center gap-3 group">
               <span>اكتشف تخصصك الآن</span>
               <span class="group-hover:-translate-x-2 transition-transform duration-300">←</span>
             </button>
-            <button @click="$router.push('/grades-input')" class="w-full sm:w-auto bg-white/80 backdrop-blur-sm hover:bg-indigo-50 text-indigo-700 border border-indigo-200 px-10 py-4 rounded-2xl font-bold text-lg transition-all hover:border-indigo-300 shadow-sm">
+            <button @click="handleAction('/grades-input')" class="w-full sm:w-auto bg-white/80 backdrop-blur-sm hover:bg-indigo-50 text-indigo-700 border border-indigo-200 px-10 py-4 rounded-2xl font-bold text-lg transition-all hover:border-indigo-300 shadow-sm">
               <span>تحليل العلامات</span>
             </button>
           </div>
@@ -116,7 +124,7 @@
 
         <div class="grid md:grid-cols-3 gap-8">
           
-          <div @click="$router.push('/assessment')" class="cursor-pointer bg-[#F8FAFF] rounded-[2.5rem] p-8 border-2 border-transparent hover:border-indigo-200 hover:bg-white transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden shadow-sm hover:shadow-xl hover:shadow-indigo-500/10">
+          <div @click="handleAction('/assessment')" class="cursor-pointer bg-[#F8FAFF] rounded-[2.5rem] p-8 border-2 border-transparent hover:border-indigo-200 hover:bg-white transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden shadow-sm hover:shadow-xl hover:shadow-indigo-500/10">
             <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-100 to-transparent rounded-bl-full transition-transform duration-500 group-hover:scale-125"></div>
             <div class="relative z-10 w-16 h-16 bg-white rounded-2xl shadow-sm border border-indigo-100 flex items-center justify-center text-3xl mb-6 group-hover:rotate-12 transition-transform duration-500">🧠</div>
             <h3 class="text-2xl font-black text-slate-800 mb-3 leading-tight group-hover:text-indigo-600 transition-colors">مقياس الميول المهنية</h3>
@@ -127,7 +135,7 @@
             </div>
           </div>
 
-          <div @click="$router.push('/grades-input')" class="cursor-pointer bg-[#F8FAFF] rounded-[2.5rem] p-8 border-2 border-transparent hover:border-amber-200 hover:bg-white transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden shadow-sm hover:shadow-xl hover:shadow-amber-500/10">
+          <div @click="handleAction('/grades-input')" class="cursor-pointer bg-[#F8FAFF] rounded-[2.5rem] p-8 border-2 border-transparent hover:border-amber-200 hover:bg-white transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden shadow-sm hover:shadow-xl hover:shadow-amber-500/10">
             <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-amber-100 to-transparent rounded-bl-full transition-transform duration-500 group-hover:scale-125"></div>
             <div class="relative z-10 w-16 h-16 bg-white rounded-2xl shadow-sm border border-amber-100 flex items-center justify-center text-3xl mb-6 group-hover:rotate-12 transition-transform duration-500">📈</div>
             <h3 class="text-2xl font-black text-slate-800 mb-3 leading-tight group-hover:text-amber-500 transition-colors">التشخيص الأكاديمي</h3>
@@ -138,7 +146,7 @@
             </div>
           </div>
 
-          <div @click="$router.push('/universities')" class="cursor-pointer bg-[#F8FAFF] rounded-[2.5rem] p-8 border-2 border-transparent hover:border-purple-200 hover:bg-white transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden shadow-sm hover:shadow-xl hover:shadow-purple-500/10">
+          <div @click="handleAction('/universities')" class="cursor-pointer bg-[#F8FAFF] rounded-[2.5rem] p-8 border-2 border-transparent hover:border-purple-200 hover:bg-white transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden shadow-sm hover:shadow-xl hover:shadow-purple-500/10">
             <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-100 to-transparent rounded-bl-full transition-transform duration-500 group-hover:scale-125"></div>
             <div class="relative z-10 w-16 h-16 bg-white rounded-2xl shadow-sm border border-purple-100 flex items-center justify-center text-3xl mb-6 group-hover:rotate-12 transition-transform duration-500">🏛️</div>
             <h3 class="text-2xl font-black text-slate-800 mb-3 leading-tight group-hover:text-purple-600 transition-colors">الدليل الجامعي</h3>
@@ -153,8 +161,48 @@
       </div>
     </section>
 
+    <!-- User Data Modal -->
+    <UserModal 
+      :is-open="isModalOpen" 
+      @close="isModalOpen = false" 
+      @saved="onUserSaved"
+    />
+
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
+import UserModal from '@/components/UserModal.vue'
+
+const router = useRouter()
+const authStore = useAuthStore()
+
+const isModalOpen = ref(false)
+const pendingRoute = ref(null)
+
+function openModal() {
+  isModalOpen.value = true
+}
+
+function handleAction(route) {
+  if (authStore.isAuthenticated) {
+    router.push(route)
+  } else {
+    pendingRoute.value = route
+    openModal()
+  }
+}
+
+function onUserSaved() {
+  if (pendingRoute.value) {
+    router.push(pendingRoute.value)
+    pendingRoute.value = null
+  }
+}
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap');

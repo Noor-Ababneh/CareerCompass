@@ -32,9 +32,14 @@
 
       <div class="mb-6 bg-white/80 backdrop-blur-xl border border-white/60 shadow-lg shadow-amber-500/5 rounded-3xl p-6 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-1.5 h-full bg-amber-400"></div>
-        <div class="step-header mb-5">
-          <div class="step-num">١</div>
-          <h2 class="font-bold text-slate-800 text-lg">حدد مرحلتك الدراسية الحالية</h2>
+        <div class="step-header mb-5 flex justify-between items-center">
+          <div class="flex items-center gap-3">
+            <div class="step-num">١</div>
+            <h2 class="font-bold text-slate-800 text-lg">حدد مرحلتك الدراسية الحالية</h2>
+          </div>
+          <span v-if="authStore.user?.gradeLevel" class="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-lg border border-amber-100">
+            تم التحديد من ملفك ✨
+          </span>
         </div>
         <div class="grid grid-cols-2 gap-3">
           <button @click="academicStage = 'junior'"
@@ -142,9 +147,11 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
 const route = useRoute()
+const authStore = useAuthStore()
 
 const academicStage = ref('junior')
 const selectedField  = ref('')
@@ -156,9 +163,19 @@ onMounted(() => {
   if (route.query.field) {
     selectedField.value = route.query.field
   }
+
+// Use the grade level from the user profile if available
+  if (authStore.user?.gradeLevel) {
+    const level = authStore.user.gradeLevel
+    if (level === '12') {
+      academicStage.value = 'senior'
+    } else {
+      academicStage.value = 'junior'
+    }
+  }
 })
 
-// تم تعديل التسميات هنا لتطابق الحقول الـ 4 المعتمدة مع إبقاء المفاتيح الأصلية
+// الحقول الأردنية الأربعة
 const fieldOptions = {
   Health: { label: 'الحقل الصحي', sub: 'الطب · الأسنان · الصيدلة · التمريض', icon: '🏥' },
   EngineeringIT: { label: 'حقل العلوم والتكنولوجيا والهندسة', sub: 'الهندسة · الحاسوب · الذكاء الاصطناعي', icon: '⚙️' },

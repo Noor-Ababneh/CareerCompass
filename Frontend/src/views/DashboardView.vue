@@ -36,9 +36,8 @@
           </div>
         </div>
         
-        <button @click="handleLogout" class="flex items-center gap-2 px-4 py-2 bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-200 text-slate-600 hover:text-rose-600 rounded-xl font-bold text-sm transition-all duration-300 shadow-sm group">
-
-          <span class="hidden sm:inline">خروج</span>
+        <button @click="openModal" class="flex items-center gap-2 px-4 py-2 bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-600 hover:text-indigo-600 rounded-xl font-bold text-sm transition-all duration-300 shadow-sm group">
+          <span class="hidden sm:inline">تبديل المستخدم</span>
         </button>
 
       </div>
@@ -138,20 +137,27 @@
         جميع بياناتك مشفرة ومحفوظة بأمان. النتائج المعروضة هي للإرشاد الأكاديمي.
       </p>
     </main>
+    <!-- User Data Modal -->
+    <UserModal 
+      :is-open="isModalOpen" 
+      @close="isModalOpen = false" 
+    />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import UserModal from '@/components/UserModal.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
 
-function handleLogout() {
-  authStore.logout()
-  router.push('/login')
+const isModalOpen = ref(false)
+
+function openModal() {
+  isModalOpen.value = true
 }
 
 // ☀️ رسالة ترحيب ذكية تتغير حسب وقت اليوم بتوقيت إربد
