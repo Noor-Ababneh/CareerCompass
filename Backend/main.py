@@ -3,6 +3,8 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 import database as db
+import uuid
+import assessment_mock
 app = FastAPI(title="CareerCompass API")
 @app.on_event("startup")
 def startup_event():
@@ -18,6 +20,12 @@ class StudentRegistration(BaseModel):
     science_score: Optional[int] = None
     english_score: Optional[int] = None
     arabic_score: Optional[int] = None
+
+class AssessmentInput(BaseModel):
+    grades: dict
+    gpa: float
+    field: str
+    stage: str
 @app.get("/")
 def read_root():
     return {
@@ -104,6 +112,45 @@ def gap_analysis(student_id: int, field_name: str):
         "field": field_name,
         "gaps": gap,
         "recommendations": recommendations
+    }
+
+
+# تقييم وحفظ النتيجة
+@app.post("/api/assessments")
+def submit_assessment(data: AssessmentInput):
+    assessment_id = str(uuid.uuid4())
+    db.save_assessment(assessment_id, data.gpa, data.field, data.stage, data.grades)
+    
+    result = assessment_mock.evaluate_assessment(
+        grades=data.grades,
+        gpa=data.gpa,
+        field=data.field,
+        stage=data.stage
+    )
+    return {
+        "message": "تم حفظ التقييم بنجاح",
+        "assessment_id": assessment_id,
+        "result": result
+    }
+
+
+# جلب تقييم محفوظ
+@app.get("/api/assessments/{assessment_id}")
+def get_saved_assessment(assessment_id: str):
+    record = db.get_assessment(assessment_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="التقييم غير موجود")
+        
+    result = assessment_mock.evaluate_assessment(
+        grades=record['grades'],
+        gpa=record['gpa'],
+        field=record['field'],
+        stage=record['stage']
+    )
+    return {
+        "assessment_id": assessment_id,
+        "result": result,
+        "created_at": record['created_at']
     }
 
 

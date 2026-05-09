@@ -1,5 +1,6 @@
 import sqlite3
 from typing import Optional, List, Dict
+import json
 
 DB_NAME = "careercompass.db"
 
@@ -78,6 +79,18 @@ def init_db():
         description TEXT,
         min_math_score INTEGER DEFAULT 60,
         min_science_score INTEGER DEFAULT 60
+    )
+    """)
+    
+    # جدول التقييمات
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS student_assessments (
+        id TEXT PRIMARY KEY,
+        gpa REAL,
+        field TEXT,
+        stage TEXT,
+        grades_json TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
     
@@ -230,6 +243,32 @@ def calculate_gap(student_id: int, field_name: str) -> Dict:
         'math_gap': max(0, field['min_math_score'] - (student['math_score'] or 0)),
         'science_gap': max(0, field['min_science_score'] - (student['science_score'] or 0))
     }
+
+
+def save_assessment(assessment_id: str, gpa: float, field: str, stage: str, grades: dict):
+    """حفظ نتيجة تقييم الطالب"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO student_assessments (id, gpa, field, stage, grades_json)
+        VALUES (?, ?, ?, ?, ?)
+    """, (assessment_id, gpa, field, stage, json.dumps(grades)))
+    conn.commit()
+    conn.close()
+
+
+def get_assessment(assessment_id: str) -> Optional[Dict]:
+    """جلب نتيجة تقييم الطالب"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM student_assessments WHERE id = ?", (assessment_id,))
+    row = cursor.fetchone()
+    conn.close()
+    if row:
+        data = dict(row)
+        data['grades'] = json.loads(data['grades_json'])
+        return data
+    return None
 
 
 # تشغيل 
