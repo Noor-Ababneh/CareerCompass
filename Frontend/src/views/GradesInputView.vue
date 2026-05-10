@@ -13,16 +13,16 @@
           <span class="group-hover:-translate-x-1 transition-transform duration-200 inline-block text-lg">←</span>
           الرئيسية
         </button>
-        <div class="badge-pill flex items-center gap-2 border-amber-200 text-amber-700 bg-amber-50">
+        <div class="badge-pill flex items-center gap-2 border-amber-200 text-amber-700 bg-amber-50 px-3 py-1.5 rounded-full border">
           <div class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></div>
-          <span>محلل المسار الأكاديمي</span>
+          <span class="text-xs font-bold">محلل المسار الأكاديمي</span>
         </div>
       </div>
 
       <div class="mb-12 text-center">
         <div class="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 px-4 py-1.5 rounded-full mb-6 shadow-sm">
           <span class="text-amber-500 text-lg">⚡</span>
-          <span class="text-amber-700 font-bold text-sm tracking-wide">المنهج الأردني المحدث 2024-2025</span>
+          <span class="text-amber-700 font-bold text-sm tracking-wide">المنهج الأردني المحدث 2025/2026</span>
         </div>
         <h1 class="text-4xl md:text-5xl font-black text-slate-800 mb-4 leading-tight">سجل علاماتك الأكاديمية</h1>
         <p class="text-slate-600 text-base leading-relaxed max-w-md mx-auto font-medium">
@@ -140,35 +140,65 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
+const route = useRoute()
+
 const academicStage = ref('junior')
 const selectedField  = ref('')
 const grades         = ref({})
 const errorMessage   = ref('')
 
-// الحقول الأردنية الأربعة
+// جلب الحقل تلقائياً إذا كان المستخدم قادماً من صفحة نتيجة اختبار الميول
+onMounted(() => {
+  if (route.query.field) {
+    selectedField.value = route.query.field
+  }
+})
+
+// تم تعديل التسميات هنا لتطابق الحقول الـ 4 المعتمدة مع إبقاء المفاتيح الأصلية
 const fieldOptions = {
-  Health: { label: 'الحقل الصحي والطبي', sub: 'الطب · طب الأسنان · الصيدلة · التمريض', icon: '🏥' },
-  EngineeringIT: { label: 'الحقل الهندسي والتكنولوجي', sub: 'الهندسة · الذكاء الاصطناعي · الأمن السيبراني', icon: '⚙️' },
-  Business: { label: 'حقل إدارة الأعمال والمالية', sub: 'المحاسبة · المالية · التسويق · إدارة الأعمال', icon: '📈' },
-  Humanities: { label: 'حقل العلوم الاجتماعية والإنسانية', sub: 'القانون · اللغات · الصحافة · الشريعة', icon: '📚' }
+  Health: { label: 'الحقل الصحي', sub: 'الطب · الأسنان · الصيدلة · التمريض', icon: '🏥' },
+  EngineeringIT: { label: 'حقل العلوم والتكنولوجيا والهندسة', sub: 'الهندسة · الحاسوب · الذكاء الاصطناعي', icon: '⚙️' },
+  Humanities: { label: 'حقل العلوم الإنسانية والاجتماعية', sub: 'القانون · اللغات · الشريعة · التربية', icon: '📚' },
+  Business: { label: 'حقل الأعمال', sub: 'المحاسبة · إدارة الأعمال · التسويق', icon: '💼' }
 }
 
 const subjectIcons = {
-  math: '📐', physics: '⚛️', chem: '🧪', bio: '🧬',
-  math_adv: '🔢', cs: '💻', 
-  math_biz: '📊', finance: '💰', mgmt: '💼', eng_adv: '📘',
-  arabic_spec: '📖', history: '🏛️', geo: '🌍', islamic_spec: '🕌'
+  chem: '🧪', bio: '🧬', eng_adv: '🇬🇧', math_phys_earth: '📐', 
+  math: '🔢', physics: '⚛️', chem_bio_earth: '🔬',
+  arabic_spec: '📖', islamic_spec: '🕌', hum_social_opt: '🌍',
+  finance: '💰', math_biz: '📊', biz_opt: '🎯'
 }
 
+// توزيع المواد كما هي بدون تغيير لتجنب أي مشاكل في الخطة
 const curriculum = {
-  Health: { math: 'الرياضيات (علمي)', physics: 'الفيزياء', chem: 'الكيمياء', bio: 'الأحياء' },
-  EngineeringIT: { math_adv: 'الرياضيات (علمي/صناعي)', physics: 'الفيزياء', chem: 'الكيمياء', cs: 'علوم الحاسوب' },
-  Business: { math_biz: 'الرياضيات (مسار الأعمال)', finance: 'الثقافة المالية', mgmt: 'الإدارة والاقتصاد', eng_adv: 'اللغة الإنجليزية' },
-  Humanities: { arabic_spec: 'اللغة العربية (تخصص)', history: 'تاريخ العرب والعالم', geo: 'الجغرافيا', islamic_spec: 'العلوم الإسلامية' }
+  Health: { 
+    chem: 'الكيمياء (إجباري)', 
+    bio: 'العلوم الحياتية (إجباري)', 
+    eng_adv: 'اللغة الإنجليزية متقدم (إجباري)', 
+    math_phys_earth: 'اختياري (رياضيات/فيزياء/علوم أرض)' 
+  },
+  EngineeringIT: { 
+    math: 'الرياضيات (إجباري)', 
+    physics: 'الفيزياء (إجباري)', 
+    eng_adv: 'اللغة الإنجليزية متقدم (إجباري)', 
+    chem_bio_earth: 'اختياري (كيمياء/أحياء/علوم أرض)' 
+  },
+  Business: { 
+    finance: 'الثقافة المالية (إجباري)', 
+    eng_adv: 'اللغة الإنجليزية متقدم (إجباري)', 
+    math_biz: 'رياضيات الأعمال (إجباري)', 
+    biz_opt: 'اختياري (تاريخ/جغرافيا/عربي تخصص...)' 
+  },
+  Humanities: { 
+    eng_adv: 'اللغة الإنجليزية متقدم (إجباري)', 
+    arabic_spec: 'اللغة العربية تخصص (إجباري)', 
+    islamic_spec: 'التربية الإسلامية تخصص (إجباري)', 
+    hum_social_opt: 'اختياري (تاريخ/جغرافيا/ثقافة مالية...)' 
+  }
 }
 
 const currentSubjects = computed(() => selectedField.value ? curriculum[selectedField.value] : {})

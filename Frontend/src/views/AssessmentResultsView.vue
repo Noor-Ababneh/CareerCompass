@@ -275,7 +275,12 @@ const personalitySummary = computed(() => {
   return summaries[top + sec] || 'شخصيتك تجمع أبعاداً متنوعة تتيح لك النجاح في عدة مجالات متداخلة.'
 })
 
-function goImprovement() { router.push({ path: '/improvement-plan', query: { field: topFieldKey.value } }) }
+function goImprovement() { 
+  router.push({ 
+    path: '/grades-input', 
+    query: { field: topFieldKey.value } 
+  }) 
+}
 function retake() { router.push({ path: '/assessment' }) }
 </script>
 
