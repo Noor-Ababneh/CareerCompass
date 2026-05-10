@@ -7,6 +7,13 @@
 
     <div class="w-full relative z-10 transition-all duration-700" :class="currentScreen === 'intro' ? 'max-w-3xl' : 'max-w-2xl'">
       
+      <!-- Floating Avatar -->
+      <div v-if="currentScreen === 'phaseIntro' && (currentPhase === 2 || currentPhase === 3) && userGender" class="fixed left-4 md:left-8 lg:left-12 xl:left-24 top-1/2 -translate-y-1/2 z-20 hidden lg:block animate-float pointer-events-none">
+        <div class="border-[3px] border-amber-300 rounded-3xl overflow-hidden shadow-2xl shadow-amber-500/20 bg-white p-2 w-[336px]">
+          <img :src="avatarSrc" class="w-full h-auto rounded-2xl" alt="Student Avatar" />
+        </div>
+      </div>
+
       <div class="bg-white/85 backdrop-blur-xl border border-white/60 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(245,158,11,0.15)] overflow-hidden relative min-h-[450px]">
         
         <div v-if="currentScreen === 'questions'" class="absolute top-0 left-0 w-full h-1.5 bg-slate-100 z-20">
@@ -162,10 +169,19 @@
 <script setup>
 import { ref, computed, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 // استدعاء بياناتك الأصلية - لا تغيري فيها شيء!
 import { riasecQuestions, phasesMeta, tieBreakerQuestions } from '@/data/riasecQuestions'
+import boyGif from '@/assets/avatars/boy2.gif'
+import girlGif from '@/assets/avatars/girl2.gif'
 
 const router = useRouter()
+const authStore = useAuthStore()
+
+const userGender = computed(() => authStore.user?.gender)
+const avatarSrc = computed(() => {
+  return userGender.value === 'female' ? girlGif : boyGif
+})
 
 // State (كما هي بخوارزميتك)
 const currentScreen = ref('intro')
@@ -358,5 +374,15 @@ onUnmounted(() => {
 }
 .animate-spin-slow {
   animation: spinSlow 2.5s linear infinite;
+}
+
+/* حركة طفو الأفاتار */
+@keyframes floatAvatar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float {
+  animation: floatAvatar 4s ease-in-out infinite;
 }
 </style>

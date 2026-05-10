@@ -148,10 +148,17 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import boyGif from '@/assets/avatars/boy2.gif'
+import girlGif from '@/assets/avatars/girl2.gif'
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
+
+const userGender = computed(() => authStore.user?.gender)
+const avatarSrc = computed(() => {
+  return userGender.value === 'female' ? girlGif : boyGif
+})
 
 const academicStage = ref('junior')
 const selectedField  = ref('')
@@ -341,5 +348,15 @@ function submit() {
 .slider::-moz-range-thumb {
   width: 22px; height: 22px; border: none; border-radius: 50%; background: white; 
   box-shadow: 0 0 0 3px rgba(245,158,11,0.5); cursor: pointer;
+}
+
+/* حركة طفو الأفاتار */
+@keyframes floatAvatar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float {
+  animation: floatAvatar 4s ease-in-out infinite;
 }
 </style>
