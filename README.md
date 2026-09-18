@@ -1,4 +1,3 @@
-CareerCompass
 CareerCompass is an academic guidance platform helping Jordanian high school students choose the right university major. It is a web-based digital advisor built to bridge the gap between a student's academic potential and their future career opportunities. Tailored specifically for the Jordanian educational landscape, the platform uses a dual-track logic system to serve both Pre-Tawjihi students (Grades 9-11) and Tawjihi students (Grade 12). By combining academic performance data with a multi-dimensional psychometric assessment evaluating Vocational Interests, Cognitive Aptitudes, and Work Styles, CareerCompass aims to reduce major-switching rates and align students with university pathways that genuinely fit them. This project is a graduation requirement for the Faculty of Prince Al-Hussein Bin Abdallah II for Information Technology, Al al-Bayt University (2025/2026).
 
 About The Project
