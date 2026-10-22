@@ -6,19 +6,26 @@ import database as db
 import uuid
 import assessment_mock
 from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="CareerCompass API")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://careercompass-jo.netlify.app" # <-- تأكدي أن هذا هو رابط موقعك الفعلي على Netlify
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 @app.on_event("startup")
 def startup_event():
     db.init_db()
     db.insert_sample_data()
     print("CareerCompass Backend is working")
+
 class StudentRegistration(BaseModel):
     name: str
     email: EmailStr
@@ -34,6 +41,7 @@ class AssessmentInput(BaseModel):
     gpa: float
     field: str
     stage: str
+
 @app.get("/")
 def read_root():
     return {
@@ -41,7 +49,8 @@ def read_root():
         "status": "running",
         "database": "ready"
     }
-#هون تسجيل طالب جديد
+
+# هون تسجيل طالب جديد
 @app.post("/register")
 def register_student(
     name: str = Form(...),
@@ -83,20 +92,17 @@ def register_student(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"خطأ في التسجيل: {str(e)}")
 
-
 # بنجيب الأسئلة
 @app.get("/questions")
 def get_questions():
     questions = db.get_all_questions()
     return {"questions": questions, "total": len(questions)}
 
-
 # بنجيب التخصصات حسب الفرع
 @app.get("/majors/{stream}")
 def get_majors(stream: str):
     majors = db.get_majors_by_stream(stream)
     return {"stream": stream, "majors": majors, "count": len(majors)}
-
 
 # Gap Analysis
 @app.get("/gap-analysis/{student_id}/{field_name}")
@@ -122,7 +128,6 @@ def gap_analysis(student_id: int, field_name: str):
         "recommendations": recommendations
     }
 
-
 # تقييم وحفظ النتيجة
 @app.post("/api/assessments")
 def submit_assessment(data: AssessmentInput):
@@ -140,7 +145,6 @@ def submit_assessment(data: AssessmentInput):
         "assessment_id": assessment_id,
         "result": result
     }
-
 
 # جلب تقييم محفوظ
 @app.get("/api/assessments/{assessment_id}")
@@ -160,7 +164,6 @@ def get_saved_assessment(assessment_id: str):
         "result": result,
         "created_at": record['created_at']
     }
-
 
 # تيست للداتابيس
 @app.get("/test-db")
@@ -194,7 +197,6 @@ def test_database():
         }
     except Exception as e:
         return {"status": "❌ Error", "message": str(e)}
-
 
 # للتشغيل
 if __name__ == "__main__":

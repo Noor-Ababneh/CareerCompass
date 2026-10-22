@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // إنشاء نسخة من axios مربوطة بالباك إند تبعك
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8000', // رابط الباك إند (FastAPI)
+  baseURL: 'https://careercompass-bngv.onrender.com', // رابط الباك إند (FastAPI)
   headers: {
     'Content-Type': 'application/json',
   }
